@@ -1,0 +1,1112 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#203f34">
+  <title>Folia · Notebook di studio</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23203f34' rx='9'/%3E%3Cpath d='M6 9q6-2 10 2 4-4 10-2v14q-6-2-10 2-4-4-10-2z' fill='none' stroke='%23f7f3e3' stroke-width='2'/%3E%3C/svg%3E">
+  <style>:root {
+  color-scheme: light;
+  --bg: #f7f7f1;
+  --surface: #fffefa;
+  --forest: #244839;
+  --green: #294b3c;
+  --ink: #242e26;
+  --muted: #626b60;
+  --line: #dddfd3;
+  --peach: #f8eee3;
+  --clay: #aa5438;
+  --correct: #57785c;
+  --wrong: #bd7357;
+  --neutral: #e2e5d9;
+  --serif: "Hedvig Letters Serif", Georgia, "Times New Roman", serif;
+  --sans: "DM Sans", "Segoe UI", Arial, sans-serif;
+  font-family: var(--sans);
+  font-size: 100%;
+  font-synthesis: none;
+}
+* {box-sizing:border-box}
+body {margin:0; background:var(--bg); color:var(--ink); min-width:260px}
+button,input,textarea {font:inherit}
+button {cursor:pointer; color:inherit}
+button:disabled {cursor:default}
+button, a, textarea, input { -webkit-tap-highlight-color:transparent }
+button:focus-visible,textarea:focus-visible,h3:focus-visible {outline:3px solid #a6752e; outline-offset:3px}
+[hidden] {display:none!important}
+.sr-only {position:absolute; width:1px;height:1px; padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.container {width:min(1504px,calc(100% - 7.2vw)); margin-inline:auto}
+.icon {display:inline-block; flex:none; width:1.15rem;height:1.15rem; fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle}
+.topbar {background:var(--surface); border-bottom:1px solid var(--line)}
+.top-inner {height:74px; display:flex; align-items:center; justify-content:space-between; gap:1rem}
+.identity, .top-inner nav, .top-action, .hero-date, .panel-head, .btn, .field-heading, .paper-foot, .quiz-actions, .step-buttons, footer, footer>span, .accuracy>div:first-child, .accuracy span, .legend dt {display:flex; align-items:center}
+.identity {gap:.7rem}
+.brand-mark {display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:var(--forest);box-shadow:inset 0 0 0 1px #ffffff25}
+.brand-mark svg {width:29px;height:29px}
+.brand {font:600 2.12rem/.9 var(--serif);letter-spacing:-.075em;color:var(--forest);padding-right:.1em}
+.brand-divider {width:1px;height:20px;background:#cfd4c8;margin:0 .45rem}
+.product {font-size:.92rem;color:#687165;font-weight:500;letter-spacing:.005em}
+.top-inner nav {gap:1.2rem}
+.top-action {justify-content:center;gap:.5rem;min-height:37px;border:1px solid transparent;background:transparent;border-radius:8px;font-size:.875rem;font-weight:600}
+.top-action.help {color:#505d51;padding:.4rem}
+.top-action.new {background:var(--surface);border-color:#cbd1c4;padding:.5rem .85rem}
+.top-action .icon {width:1.05rem;height:1.05rem}
+.top-action:hover,.square:not(:disabled):hover,.results-btn:hover {background:#eff2e9;border-color:#a4b09e}
+.hero {position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;margin:28px 0 24px; min-height:190px;border-radius:16px;background:linear-gradient(107deg,#203e32 10%,#2d5040 68%,#284939);color:#fffcf2}
+.grid-paper {position:absolute;inset:0;z-index:-1;opacity:.38;background-image:linear-gradient(#a8ba8f32 1px,transparent 1px),linear-gradient(90deg,#a8ba8f32 1px,transparent 1px);background-size:25px 25px;mask-image:linear-gradient(100deg,transparent 13%,#000 83%)}
+.hero-copy {z-index:1;padding:30px clamp(24px,3vw,51px);width:68%}
+.hero-date {gap:.52rem;font-size:.74rem;letter-spacing:.12em;font-weight:650;text-transform:uppercase;color:#dae0b8}
+.hero-date .icon {width:14px;height:14px}
+h1,h2,h3,p {margin:0}
+h1,h2,h3 {font-family:var(--serif);font-weight:400}
+h1 {font-size:clamp(2.7rem,4.1vw,4.2rem);line-height:1.08;letter-spacing:-.052em;margin:.58rem 0 .68rem}
+h1 span {color:#e1bc7a}
+.hero-copy>p {font-size:1rem;color:#e3e9dc;line-height:1.5}
+.hero-art {position:absolute;z-index:-1;right:4%;top:51%;transform:translateY(-50%) rotate(-3deg);width:min(38%,465px);line-height:0;pointer-events:none}
+.hero-art svg {width:100%;height:auto;display:block}
+.workspace {display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1.85fr) minmax(0,.84fr);gap:clamp(14px,1.45vw,24px);align-items:start}
+.panel {min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 3px 12px #273a2105;overflow:hidden;--pad:clamp(16px,1.45vw,25px)}
+.panel-head {gap:.72rem;padding:18px var(--pad);border-bottom:1px solid #e3e5dc;min-height:73px}
+.panel h2 {font-size:clamp(1.35rem,1.55vw,1.65rem);line-height:1.14;letter-spacing:-.045em}
+.section-icon, .empty-icon {width:33px;height:33px;display:inline-grid;place-items:center;border-radius:9px;flex:none}
+.section-icon .icon {width:18px;height:18px}
+.sage {background:#e9efdf;color:#476842}
+.apricot {background:#f5e4d6;color:#a65734}
+.wheat {background:#f1ecd8;color:#86702f}
+.notes-form,.quiz-body,.stats-body {padding:var(--pad)}
+.field-heading {justify-content:space-between;color:var(--muted);margin-bottom:.7rem;font-size:.875rem;font-weight:620}
+.field-heading .icon {width:15px;height:15px;color:#74806e}
+.paper-input {overflow:hidden;border:1px solid #d6dacb;border-radius:9px;background:#f7f8f0;transition:border-color .15s}
+.paper-input:focus-within {border-color:#729072;box-shadow:0 0 0 2px #58785923}
+textarea#notes {display:block;width:100%;height:clamp(205px,16vw,258px);min-height:120px;border:0;resize:vertical;padding:10px 12px 6px;background:repeating-linear-gradient(transparent 0 26px,#89987925 26px 27px) local;background-position:0 11px;color:#384334;line-height:27px;font-size:.975rem;scrollbar-width:thin;scrollbar-color:#c1c7b7 transparent}
+textarea#notes:focus {outline:0}
+textarea::placeholder {color:#6b7567}
+.paper-foot {border-top:1px solid #dee2d3;gap:.4rem;min-height:31px;padding:4px 11px;font-size:.76rem;color:#68735e;background:#f3f5eb;}
+.paper-foot .icon {width:13px;height:13px}
+.btn {justify-content:center;gap:.55rem;min-height:39px;padding:.55rem .95rem;border:1px solid transparent;border-radius:8px;font-weight:620;font-size:.875rem;line-height:1.35}
+.btn-forest {background:var(--forest);color:#fffefa}
+.btn-forest:not(:disabled):hover {background:#183b2d}
+.btn-clay {background:var(--clay);color:white}
+.btn-clay:not(:disabled):hover {background:#8c442d}
+.btn:disabled {opacity:.56}
+.btn.generate {width:100%;margin-top:1rem;font-size:.93rem;min-height:43px}
+.generate .icon {width:18px;height:18px}
+.cancel-load,.text-button {border:0;background:transparent;text-decoration:underline;text-underline-offset:3px;font-size:.9rem;color:var(--forest)}
+.cancel-load {display:block;margin:.6rem auto 0}
+.error-msg {padding:10px 12px;margin:10px 0 0;border-radius:7px;background:#faf0e7;color:#823f2c;font-size:.88rem;line-height:1.45;overflow-wrap:anywhere}
+.mode-badge {margin-left:auto;border:1px solid #dfd6c1;border-radius:20px;padding:.21rem .65rem .24rem;font-weight:600;line-height:1.35;font-size:.75rem;letter-spacing:.01em;background:#f8f4e9;color:#776646;white-space:nowrap}
+.mode-badge.live {color:#406140;background:#edf3e6;border-color:#d4dfcc}
+.question-nav {display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:clamp(3px,.45vw,8px);margin-bottom:1.05rem}
+.question-nav button {border:1px solid #dddfd3;border-radius:6px;background:#fafaf4;color:#626a5d;font:600 .81rem/1 var(--sans);height:31px;padding:0;position:relative;font-variant-numeric:tabular-nums}
+.question-nav button:hover {border-color:#a88c78}
+.question-nav button.right {background:#e8efdf;color:#365737;border-color:#b4c6a7}
+.question-nav button.wrong {background:#f7e7dc;color:#86492e;border-color:#d8ad96}
+.question-nav button[aria-current="step"] {background:var(--clay);border-color:var(--clay);color:white}
+.question-paper {position:relative;overflow:hidden;border:1px solid #e9d7c6;border-radius:9px;background:#f9efe4;padding:clamp(17px,1.52vw,26px);min-height:117px}
+.question-paper::after {content:"";position:absolute;right:-1px;top:-1px;width:18px;height:18px;background:linear-gradient(45deg,#ecdbc6 0 48%,#fffefa 51%);border-bottom-left-radius:4px}
+.question-label {display:flex;align-items:center;gap:.55rem;font-size:.70rem;font-weight:700;text-transform:uppercase;letter-spacing:.13em;color:#995231;margin-bottom:.65rem}
+.question-label>span:first-child {display:block;width:19px;height:2px;background:#c68b64}
+.question-paper h3 {font-size:clamp(1.35rem,1.75vw,1.85rem);line-height:1.22;letter-spacing:-.035em;color:#3e352c;overflow-wrap:anywhere}
+.options {border:0;padding:0;margin:14px 0 0;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.option {display:flex;align-items:center;position:relative;gap:.65rem;min-height:49px;background:#fffefa;border:1px solid #dcded4;border-radius:7px;padding:9px 11px;font-size:.9rem;line-height:1.35;cursor:pointer;overflow-wrap:anywhere}
+.option input {position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.option:has(input:focus-visible) {outline:3px solid #a6752e;outline-offset:2px}
+.option:has(input:checked) {border-color:#ac6847;background:#fcf0e5;box-shadow:0 0 0 1px #ac6847}
+.option:hover:has(input:not(:disabled)) {border-color:#b69e81}
+.option.right {border-color:#899f7e!important;background:#edf3e6!important;box-shadow:none!important}
+.option.wrong {border-color:#c4987f!important;background:#f9eae2!important;box-shadow:none!important}
+.option:has(input:disabled) {cursor:default}
+.letter {display:inline-grid;place-items:center;flex:none;width:23px;height:23px;border:1px solid #e1e2d7;border-radius:5px;color:#68705e;background:#f4f5ec;font-weight:700;font-size:.72rem}
+.option:has(input:checked) .letter {background:#aa5f3f;color:white;border-color:#aa5f3f}
+.option.right .letter {background:#4c704d!important;border-color:#4c704d!important;color:white}
+.option.wrong .letter {background:#99573c!important;border-color:#99573c!important;color:white}
+.answer-mark {margin-left:auto;font-weight:bold}
+.feedback {margin:.8rem 0 0;font-size:.87rem;line-height:1.45;color:#496540;overflow-wrap:anywhere}
+.feedback.missed {color:#8c492d}
+.quiz-actions {margin-top:17px;gap:.55rem;justify-content:space-between}
+.step-buttons {gap:.4rem}
+.square {display:inline-grid;place-items:center;width:34px;height:34px;padding:0;border-radius:7px;border:1px solid #d8dccf;color:#435642;background:var(--surface)}
+.square:disabled {color:#a5ac9d;background:#fafbf6}
+.square .icon {width:17px;height:17px}
+.stats-body {padding-top:18px}
+.chart {width:clamp(120px,10.1vw,154px);aspect-ratio:1;margin:0 auto 18px;position:relative}
+.chart>svg {display:block;width:100%;height:100%}
+.chart-caption {display:flex;align-items:center;justify-content:center;flex-direction:column;position:absolute;inset:0}
+.chart-caption>div {display:flex;align-items:baseline;line-height:1;color:#354536}
+.chart-caption b {font:400 2.45rem/.95 var(--serif);letter-spacing:-.07em}
+.chart-caption span {font-size:1rem;color:#697161;font-weight:550;margin-left:2px}
+.chart-caption small {font-size:.74rem;color:#626b5d;margin-top:4px}
+.legend {margin:0;display:grid;gap:.62rem}
+.legend>div {display:flex;align-items:center;justify-content:space-between}
+.legend dt {gap:.55rem;font-size:.88rem;color:#525f50}
+.legend dd {font-size:.91rem;font-weight:650;margin:0;font-variant-numeric:tabular-nums}
+.dot {height:9px;width:9px;border-radius:3px;flex:none}
+.dot-green {background:var(--correct)} .dot-clay {background:var(--wrong)} .dot-neutral {background:var(--neutral);border:1px solid #cfd4c4}
+.accuracy {border-top:1px solid var(--line);margin-top:18px;padding-top:16px}
+.accuracy>div:first-child {justify-content:space-between;gap:5px}
+.accuracy span {gap:.4rem;color:#505e4d;font-size:.84rem;font-weight:600}
+.accuracy .icon {width:15px;height:15px}
+.accuracy strong {font-size:.9rem;color:#526b4b}
+.track {height:5px;border-radius:4px;background:#eaede2;margin-top:10px;overflow:hidden}
+.track>div {height:100%;width:0;background:#69825d;transition:width .25s}
+.results-btn {margin-top:16px;width:100%;font-size:.86rem;font-weight:600;border:1px solid #b7c5af;color:var(--forest);background:#f2f5eb;border-radius:7px;padding:8px}
+.empty-quiz {display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:329px;padding:24px;gap:10px}
+.empty-icon {width:49px;height:49px;background:#f6e9db;color:#a65e3e}
+.empty-icon .icon {width:26px;height:26px}
+.empty-quiz h3 {font-size:1.65rem;letter-spacing:-.03em}
+.empty-quiz p {color:var(--muted);line-height:1.5;font-size:.94rem}
+.spinner {width:32px;height:32px;margin-bottom:6px;border:3px solid #e4e8da;border-top-color:#526d4b;border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin {to{transform:rotate(360deg)}}
+footer {justify-content:space-between;gap:1rem;flex-wrap:wrap;margin:24px 0 22px;padding:15px 2px 0;border-top:1px solid #dce0d2;color:#677161;font-size:.77rem}
+footer>span {gap:.45rem}
+footer em {font-style:normal;color:#adb3a2;padding:0 2px}
+footer .icon {height:15px;width:15px}
+dialog {padding:0;max-width:min(420px,calc(100% - 32px));width:100%;border:1px solid #cfd6c7;border-radius:15px;color:var(--ink);background:var(--surface);box-shadow:0 20px 80px #22342330}
+dialog::backdrop {background:#182a2390}
+.dialog-inner {position:relative;padding:28px}
+.dialog-icon {margin-bottom:14px;width:38px;height:38px}
+.dialog-inner h2 {font-size:1.85rem;letter-spacing:-.045em;padding-right:10px}
+.close {position:absolute;right:15px;top:15px;border:none}
+#modal-copy {margin:12px 0 20px;line-height:1.55;font-size:.96rem;color:#505f50;overflow-wrap:anywhere}
+#modal-copy p+p {margin-top:9px}
+#modal-copy ol {padding-left:1.3em;margin:0}
+#modal-copy li+li {margin-top:8px}
+#modal-actions {display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.btn-light {background:var(--surface);border-color:var(--line)}
+@media(min-width:1700px) {.hero {min-height:209px}.panel-head {padding-block:21px}}
+@media(max-width:1120px) and (min-width:881px) {.container{width:calc(100% - 42px)}.workspace{grid-template-columns:minmax(0,1fr) minmax(0,1.7fr) minmax(0,.83fr);gap:12px}.panel{--pad:14px}.panel-head{gap:8px}.option{padding:8px;gap:7px}.hero{margin-top:22px}}
+@media(max-width:880px) {
+  .container{width:calc(100% - 36px)}.hero{min-height:170px;margin:20px 0}.hero-art{right:0;width:41%}
+  .workspace{grid-template-columns:minmax(0,.94fr) minmax(0,1.5fr);gap:15px}.stats-panel{grid-column:1/-1}
+  .stats-body{display:grid;grid-template-columns:130px 1fr 1fr;align-items:center;gap:25px;padding:16px 22px}.chart{width:100px;margin:0}.accuracy{border-top:0;margin:0;padding:0}.results-btn{margin:0;grid-column:2 / -1}
+  .panel{--pad:16px}.panel-head{min-height:62px;padding-block:13px}.quiz-actions .btn{padding:.5rem .6rem}
+}
+@media(max-width:650px) {
+  .container{width:calc(100% - 28px)}.top-inner{height:62px}.identity{gap:8px}.brand{font-size:1.9rem}.brand-mark{width:32px;height:32px;border-radius:9px}.brand-mark svg{width:25px;height:25px}
+  .product,.brand-divider{display:none}.top-inner nav{gap:5px}.top-action.help{padding:.45rem}.top-action.help span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.top-action.new{font-size:.81rem}
+  .hero{min-height:155px;margin:15px 0;border-radius:12px}.hero-copy{padding:20px;width:100%}.hero-date{font-size:.64rem;gap:.4rem}.hero-date .icon{width:12px;height:12px}
+  h1{font-size:clamp(1.8rem,8.65vw,2.48rem)}.hero-copy>p{font-size:.88rem;max-width:min(240px,66%)}.hero-art{width:37%;right:-1%;top:auto;bottom:9px;transform:rotate(-5deg);opacity:.85}
+  .workspace{grid-template-columns:minmax(0,1fr);gap:14px}.stats-panel{grid-column:auto}.panel{--pad:16px}.panel h2{font-size:1.5rem}
+  textarea#notes{height:130px}.notes-form .generate{margin-top:12px}.question-paper h3{font-size:1.55rem}.question-nav{gap:4px}.question-nav button{height:32px}.mode-badge{font-size:.75rem}
+  .stats-body{grid-template-columns:100px 1fr;gap:16px 21px}.accuracy,.results-btn{grid-column:1/-1}.chart{width:100px}
+  footer{font-size:.72rem;margin-top:18px;gap:8px}
+}
+@media(max-width:355px) {.option{font-size:.85rem;padding:7px;gap:6px}.question-nav{gap:2px}.question-nav button{font-size:.72rem}.quiz-actions{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce) {*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition:none!important;scroll-behavior:auto!important}}</style>
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden"><defs><symbol id="ic-notes" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 3v18M11 8h5m-5 4h5"/></symbol>
+<symbol id="ic-book" viewBox="0 0 24 24"><path d="M3 4.5c3-.8 6.4.1 9 2.1 2.6-2 6-2.9 9-2.1v14c-3-.7-6.4.1-9 2-2.6-1.9-6-2.7-9-2zM12 6.6v13.8"/></symbol>
+<symbol id="ic-cards" viewBox="0 0 24 24"><rect x="3" y="7.5" width="15" height="12" rx="2"/><path d="M7.5 4.5h11.1c1.3 0 2.4.9 2.4 2.1V15M7 12h6M7 15h4"/></symbol>
+<symbol id="ic-chart" viewBox="0 0 24 24"><path d="M4 20V5m0 15h16M8 16v-4m5 4V7m5 9v-6"/></symbol>
+<symbol id="ic-edit" viewBox="0 0 24 24"><path d="m5 15-.9 4.9 4.9-1 10.1-10a1.9 1.9 0 0 0 0-2.7L18 5a1.9 1.9 0 0 0-2.7 0ZM13.7 6.6l3.7 3.7"/></symbol>
+<symbol id="ic-align" viewBox="0 0 24 24"><path d="M4 6h15M4 10h12M4 14h15M4 18h8"/></symbol>
+<symbol id="ic-sparkles" viewBox="0 0 24 24"><path d="M10.5 3c.8 5.5 2.8 7.6 7.5 8.5-4.7.9-6.7 3-7.5 8.5-.8-5.5-2.8-7.6-7.5-8.5 4.7-.9 6.7-3 7.5-8.5Z"/><path d="M19 2v5m-2.5-2.5h5M19 16v5m-2.5-2.5h5"/></symbol>
+<symbol id="ic-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.3a2.5 2.5 0 0 1 5 .3c0 1.8-2.5 2-2.5 4m0 3h.01"/></symbol>
+<symbol id="ic-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="ic-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4m9-4v4M4 10h16"/></symbol>
+<symbol id="ic-device" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="13" rx="2"/><path d="M2 20h20m-13-9 2 2 4-4"/></symbol>
+<symbol id="ic-left" viewBox="0 0 24 24"><path d="m14.5 6.5-5.5 5.5 5.5 5.5"/></symbol>
+<symbol id="ic-right" viewBox="0 0 24 24"><path d="m9.5 6.5 5.5 5.5-5.5 5.5"/></symbol>
+<symbol id="ic-check" viewBox="0 0 24 24"><path d="m4.5 12 5 5 10-10"/></symbol>
+<symbol id="ic-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></symbol>
+<symbol id="ic-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol></defs></svg>
+  <header class="topbar">
+    <div class="container top-inner">
+      <div class="identity">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none"><path d="M5 8c4-.7 8 .7 11 3.3v16c-3.4-2.8-7.5-4.1-11-3.4Z" fill="#f4edcc"/><path d="M18 12.1C21 9 25.4 7.2 29.3 7.4v16.2c-3.4-.2-7.9 1.5-11.3 4.4Z" stroke="#f4edcc" stroke-width="1.7"/><path d="M19 9c1-3.5 3.9-5.6 7.3-5.9-.3 2.9-2.6 5.5-7.3 5.9Z" fill="#c5cb89"/></svg></span>
+        <span class="brand">Folia</span><span class="brand-divider"></span><span class="product">Notebook di studio</span>
+      </div>
+      <nav aria-label="Strumenti del notebook">
+        <button type="button" id="help" class="top-action help"><i data-icon="help"></i><span>Guida rapida</span></button>
+        <button type="button" id="new-session" class="top-action new"><i data-icon="plus"></i><span>Nuova sessione</span></button>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="grid-paper" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <div class="hero-date"><i data-icon="calendar"></i><span id="date"></span></div>
+        <h1 id="page-title">Il mio quaderno<span>.</span></h1>
+        <p>Trasforma i tuoi appunti in un quiz di 10 domande.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 180" fill="none" aria-hidden="true" focusable="false">
+<defs>
+ <linearGradient id="fol-page-0" x1="0" x2="1" y1="0" y2=".8" gradientUnits="objectBoundingBox"><stop stop-color="#819178"/><stop offset=".34" stop-color="#6b826b"/><stop offset=".84" stop-color="#54735e"/><stop offset="1" stop-color="#294e42"/></linearGradient>
+ <linearGradient id="fol-page-1"><stop stop-color="#274e40"/><stop offset=".16" stop-color="#658167"/><stop offset=".64" stop-color="#8f9c7e"/><stop offset="1" stop-color="#778b72"/></linearGradient>
+ <linearGradient id="fol-leaf"><stop stop-color="#687c55"/><stop offset=".45" stop-color="#849362"/><stop offset="1" stop-color="#3d624b"/></linearGradient>
+</defs>
+<g stroke-linecap="round" stroke-linejoin="round">
+<!-- Cloth-bound cover and the layers of the two page blocks. -->
+<path d="M100 50 Q157 27 237 71 Q293 27 347 27 L372 100 L370 106 Q297 106 217 147 C208 153 203 150 199 146 Q137 109 62 119 L60 113Z" fill="#183b32" stroke="#aeb897" stroke-width="1.15"/>
+<path d="M61 113 Q136 101 201 141 Q208 147 216 141 Q299 100 370 99 L369 102 Q296 105 216 145 C209 150 205 147 201 145 Q133 106 62 117Z" fill="#718369" stroke="#a3ae8b" stroke-width=".6"/>
+<path d="M65 109 Q118 89 205 138 Q211 143 215 138 Q289 98 367 95 L368 101 Q286 102 216 141 Q209 148 203 141 Q132 103 65 115Z" fill="#536f5c" stroke="#9da888" stroke-width=".6"/>
+<path d="M67.2,111.1 L73.24,109.46 L79.34,108.1 L85.51,107.02 L91.74,106.22 L98.02,105.7 L104.36,105.47 L110.73,105.53 L117.15,105.89 L123.6,106.53 L130.07,107.48 L136.58,108.72 L143.09,110.28 L149.63,112.13 L156.17,114.3 L162.72,116.78 L169.26,119.57 L175.8,122.68 L182.32,126.11 L188.83,129.87 L195.31,133.95 L201.77,138.36 L209.8,143.1" stroke="#8f9c81" stroke-width=".72"/>
+<path d="M67.33,110.25 L73.37,108.61 L79.47,107.25 L85.64,106.17 L91.87,105.37 L98.15,104.85 L104.49,104.62 L110.86,104.68 L117.28,105.04 L123.73,105.68 L130.2,106.63 L136.71,107.88 L143.22,109.43 L149.76,111.28 L156.3,113.45 L162.85,115.93 L169.39,118.72 L175.93,121.83 L182.45,125.26 L188.96,129.02 L195.44,133.1 L201.9,137.51 L209.67,142.25" stroke="#c6caa7" stroke-width=".72"/>
+<path d="M67.47,109.4 L73.51,107.76 L79.61,106.4 L85.78,105.32 L92.01,104.52 L98.29,104 L104.63,103.77 L111,103.83 L117.42,104.19 L123.87,104.83 L130.34,105.78 L136.85,107.03 L143.36,108.58 L149.9,110.43 L156.44,112.6 L162.99,115.08 L169.53,117.87 L176.07,120.98 L182.59,124.41 L189.1,128.17 L195.58,132.25 L202.04,136.66 L209.53,141.4" stroke="#9aa88c" stroke-width=".72"/>
+<path d="M67.6,108.55 L73.64,106.91 L79.74,105.55 L85.91,104.47 L92.14,103.67 L98.42,103.15 L104.76,102.92 L111.13,102.98 L117.55,103.34 L124,103.98 L130.47,104.93 L136.98,106.17 L143.49,107.73 L150.03,109.58 L156.57,111.75 L163.12,114.23 L169.66,117.02 L176.2,120.13 L182.72,123.56 L189.23,127.32 L195.71,131.4 L202.17,135.81 L209.4,140.55" stroke="#cccca9" stroke-width=".72"/>
+<path d="M67.73,107.7 L73.77,106.06 L79.87,104.7 L86.04,103.62 L92.27,102.82 L98.55,102.3 L104.89,102.07 L111.26,102.13 L117.68,102.49 L124.13,103.13 L130.6,104.08 L137.11,105.33 L143.62,106.88 L150.16,108.73 L156.7,110.9 L163.25,113.38 L169.79,116.17 L176.33,119.28 L182.85,122.71 L189.36,126.47 L195.84,130.55 L202.3,134.96 L209.27,139.7" stroke="#7e917c" stroke-width=".72"/>
+<path d="M67.87,106.85 L73.91,105.21 L80.01,103.85 L86.18,102.77 L92.41,101.97 L98.69,101.45 L105.03,101.22 L111.4,101.28 L117.82,101.64 L124.27,102.28 L130.74,103.23 L137.25,104.47 L143.76,106.03 L150.3,107.88 L156.84,110.05 L163.39,112.53 L169.93,115.32 L176.47,118.43 L182.99,121.86 L189.5,125.62 L195.98,129.7 L202.44,134.11 L209.13,138.85" stroke="#aeb899" stroke-width=".72"/>
+<path d="M209.8,143.1 L216.56,138.68 L223.46,134.44 L230.49,130.37 L237.63,126.49 L244.86,122.81 L252.16,119.35 L259.52,116.1 L266.92,113.07 L274.34,110.29 L281.76,107.75 L289.18,105.47 L296.55,103.46 L303.89,101.73 L311.15,100.27 L318.33,99.12 L325.41,98.27 L332.37,97.73 L339.2,97.52 L345.87,97.64 L352.38,98.1 L358.69,98.92 L364.8,100.1" stroke="#8f9c81" stroke-width=".72"/>
+<path d="M209.67,142.25 L216.43,137.83 L223.33,133.59 L230.36,129.52 L237.5,125.64 L244.73,121.96 L252.03,118.5 L259.39,115.25 L266.79,112.22 L274.21,109.44 L281.63,106.9 L289.05,104.63 L296.42,102.61 L303.76,100.88 L311.02,99.42 L318.2,98.27 L325.28,97.42 L332.24,96.88 L339.07,96.67 L345.74,96.79 L352.25,97.25 L358.56,98.07 L364.67,99.25" stroke="#c6caa7" stroke-width=".72"/>
+<path d="M209.53,141.4 L216.29,136.98 L223.19,132.74 L230.22,128.67 L237.36,124.79 L244.59,121.11 L251.89,117.65 L259.25,114.4 L266.65,111.37 L274.07,108.59 L281.49,106.05 L288.91,103.78 L296.28,101.76 L303.62,100.03 L310.88,98.57 L318.06,97.42 L325.14,96.57 L332.1,96.03 L338.93,95.82 L345.6,95.94 L352.11,96.4 L358.42,97.22 L364.53,98.4" stroke="#9aa88c" stroke-width=".72"/>
+<path d="M209.4,140.55 L216.16,136.13 L223.06,131.89 L230.09,127.82 L237.23,123.94 L244.46,120.26 L251.76,116.8 L259.12,113.55 L266.52,110.52 L273.94,107.74 L281.36,105.2 L288.78,102.92 L296.15,100.91 L303.49,99.18 L310.75,97.72 L317.93,96.57 L325.01,95.72 L331.97,95.18 L338.8,94.97 L345.47,95.09 L351.98,95.55 L358.29,96.37 L364.4,97.55" stroke="#cccca9" stroke-width=".72"/>
+<path d="M209.27,139.7 L216.03,135.28 L222.93,131.04 L229.96,126.97 L237.1,123.09 L244.33,119.41 L251.63,115.95 L258.99,112.7 L266.39,109.67 L273.81,106.89 L281.23,104.35 L288.65,102.08 L296.02,100.06 L303.36,98.33 L310.62,96.87 L317.8,95.72 L324.88,94.87 L331.84,94.33 L338.67,94.12 L345.34,94.24 L351.85,94.7 L358.16,95.52 L364.27,96.7" stroke="#7e917c" stroke-width=".72"/>
+<path d="M209.13,138.85 L215.89,134.43 L222.79,130.19 L229.82,126.12 L236.96,122.24 L244.19,118.56 L251.49,115.1 L258.85,111.85 L266.25,108.82 L273.67,106.04 L281.09,103.5 L288.51,101.22 L295.88,99.21 L303.22,97.48 L310.48,96.02 L317.66,94.87 L324.74,94.02 L331.7,93.48 L338.53,93.27 L345.2,93.39 L351.71,93.85 L358.02,94.67 L364.13,95.85" stroke="#aeb899" stroke-width=".72"/>
+<!-- Ribbon emerging from beneath the right page block. -->
+<path d="M280 110 Q286 110 294 107 Q294 121 298 132 L290 129 L284 136 Q281 124 280 110Z" fill="#c4a16a" stroke="#ded2a0" stroke-width=".85"/>
+<path d="M284 113 Q285 125 286 131 M290 111 Q289 121 293 127" stroke="#977b4c" stroke-width=".7"/>
+<path d="M106,46 L111.79,43.84 L117.69,42 L123.68,40.48 L129.76,39.28 L135.92,38.38 L142.13,37.79 L148.39,37.51 L154.68,37.53 L160.99,37.85 L167.31,38.46 L173.63,39.38 L179.92,40.58 L186.18,42.07 L192.4,43.84 L198.57,45.9 L204.66,48.24 L210.66,50.86 L216.58,53.75 L222.38,56.91 L228.06,60.34 L233.6,64.04 L239,68 L209,138 L202.57,133.26 L196.11,128.85 L189.63,124.77 L183.12,121.01 L176.6,117.58 L170.06,114.47 L163.52,111.68 L156.97,109.2 L150.43,107.03 L143.89,105.18 L137.38,103.63 L130.87,102.38 L124.4,101.43 L117.95,100.79 L111.53,100.43 L105.16,100.37 L98.82,100.6 L92.54,101.12 L86.31,101.92 L80.14,103 L74.04,104.36 L68,106" fill="url(#fol-page-0)" stroke="#d9d3a2" stroke-width="1.25"/>
+<path d="M239,68 L243.88,64.12 L248.72,60.4 L253.52,56.83 L258.28,53.43 L263.01,50.2 L267.7,47.15 L272.37,44.28 L277.02,41.6 L281.65,39.12 L286.27,36.83 L290.88,34.75 L295.47,32.88 L300.07,31.22 L304.67,29.79 L309.28,28.59 L313.89,27.62 L318.52,26.88 L323.16,26.39 L327.83,26.16 L332.52,26.17 L337.25,26.45 L342,27 L364,95 L357.89,93.82 L351.58,93 L345.07,92.54 L338.4,92.42 L331.57,92.63 L324.61,93.17 L317.53,94.02 L310.35,95.17 L303.09,96.63 L295.75,98.36 L288.38,100.38 L280.96,102.65 L273.54,105.19 L266.12,107.97 L258.72,111 L251.36,114.25 L244.06,117.71 L236.83,121.39 L229.69,125.27 L222.66,129.34 L215.76,133.58 L209,138" fill="url(#fol-page-1)" stroke="#d9d3a2" stroke-width="1.25"/>
+<path d="M108.32,46.76 L113.94,44.9 L119.65,43.33 L125.44,42.05 L131.31,41.05 L137.23,40.34 L143.21,39.9 L149.22,39.75 L155.26,39.87 L161.32,40.27 L167.38,40.94 L173.43,41.88 L179.47,43.09 L185.47,44.56 L191.44,46.29 L197.35,48.29 L203.2,50.54 L208.98,53.05 L214.68,55.81 L220.27,58.83 L225.77,62.09 L231.14,65.6 L236.38,69.35" stroke="#dce0b7" opacity="0.68" stroke-width="0.85"/>
+<path d="M107.71,47.72 L113.33,45.87 L119.05,44.31 L124.85,43.03 L130.71,42.04 L136.64,41.33 L142.62,40.91 L148.63,40.76 L154.68,40.89 L160.73,41.29 L166.8,41.97 L172.85,42.91 L178.89,44.12 L184.9,45.6 L190.87,47.34 L196.79,49.34 L202.65,51.6 L208.44,54.12 L214.14,56.89 L219.75,59.91 L225.25,63.18 L230.64,66.7 L235.9,70.47" stroke="#dce0b7" opacity="0.2" stroke-width="0.45"/>
+<path d="M107.11,48.69 L112.73,46.84 L118.45,45.29 L124.25,44.02 L130.12,43.03 L136.05,42.33 L142.03,41.91 L148.05,41.77 L154.09,41.9 L160.15,42.31 L166.21,42.99 L172.27,43.94 L178.31,45.16 L184.33,46.64 L190.3,48.39 L196.23,50.39 L202.1,52.66 L207.89,55.18 L213.6,57.96 L219.22,60.99 L224.74,64.28 L230.14,67.81 L235.41,71.58" stroke="#dce0b7" opacity="0.2" stroke-width="0.45"/>
+<path d="M106.5,49.65 L112.13,47.82 L117.85,46.27 L123.65,45 L129.53,44.03 L135.46,43.33 L141.44,42.91 L147.46,42.78 L153.5,42.92 L159.56,43.33 L165.63,44.01 L171.69,44.97 L177.74,46.19 L183.76,47.68 L189.74,49.43 L195.67,51.45 L201.54,53.72 L207.35,56.25 L213.07,59.04 L218.7,62.08 L224.22,65.37 L229.64,68.91 L234.93,72.7" stroke="#dce0b7" opacity="0.2" stroke-width="0.45"/>
+<path d="M105.9,50.62 L111.53,48.79 L117.25,47.25 L123.06,45.99 L128.93,45.02 L134.86,44.33 L140.85,43.92 L146.87,43.79 L152.91,43.93 L158.98,44.35 L165.05,45.04 L171.11,46 L177.16,47.22 L183.19,48.72 L189.17,50.48 L195.11,52.5 L200.99,54.78 L206.8,57.32 L212.53,60.11 L218.17,63.16 L223.71,66.46 L229.14,70.02 L234.44,73.82" stroke="#dce0b7" opacity="0.2" stroke-width="0.45"/>
+<path d="M105.29,51.59 L110.93,49.76 L116.65,48.23 L122.46,46.98 L128.34,46.01 L134.27,45.33 L140.26,44.92 L146.28,44.79 L152.33,44.94 L158.39,45.37 L164.47,46.06 L170.53,47.03 L176.59,48.26 L182.61,49.76 L188.6,51.52 L194.55,53.55 L200.44,55.84 L206.25,58.38 L211.99,61.19 L217.65,64.25 L223.2,67.56 L228.64,71.12 L233.96,74.93" stroke="#dce0b7" opacity="0.2" stroke-width="0.45"/>
+<path d="M104.68,52.55 L110.32,50.74 L116.05,49.21 L121.86,47.96 L127.74,47 L133.68,46.32 L139.67,45.92 L145.69,45.8 L151.74,45.96 L157.81,46.38 L163.88,47.08 L169.95,48.05 L176.01,49.29 L182.04,50.8 L188.04,52.57 L193.99,54.6 L199.88,56.9 L205.71,59.45 L211.46,62.26 L217.12,65.33 L222.68,68.65 L228.14,72.23 L233.47,76.05" stroke="#dce0b7" opacity="0.2" stroke-width="0.45"/>
+<path d="M108.37,47.63 L74.15,102.3" stroke="#cdd3aa" stroke-width=".55" opacity="0.63"/>
+<path d="M109.39,47.28 L75.22,102.03" stroke="#cdd3aa" stroke-width=".55" opacity="0.35"/>
+<path d="M110.43,46.93 L76.29,101.76" stroke="#cdd3aa" stroke-width=".55" opacity="0.35"/>
+<path d="M119.71,53.19 L121.26,52.93 L122.82,52.69 L124.38,52.47 L125.94,52.27" stroke="#d4d5b2" opacity="0.44" stroke-width="0.91"/>
+<path d="M127.86,52.06 L129.99,51.85 L132.14,51.68 L134.29,51.54 L136.45,51.44" stroke="#d4d5b2" opacity="0.51" stroke-width="0.91"/>
+<path d="M138.8,51.37 L141.54,51.35 L144.28,51.38 L147.03,51.46 L149.79,51.6" stroke="#d4d5b2" opacity="0.59" stroke-width="0.91"/>
+<path d="M152.58,51.81 L154.62,51.99 L156.66,52.2 L158.7,52.45 L160.74,52.72" stroke="#d4d5b2" opacity="0.66" stroke-width="0.91"/>
+<path d="M162.7,53.02 L165.31,53.45 L167.93,53.94 L170.54,54.47 L173.15,55.05" stroke="#d4d5b2" opacity="0.49" stroke-width="0.91"/>
+<path d="M175.52,55.63 L177.4,56.11 L179.28,56.63 L181.16,57.16 L183.04,57.73" stroke="#d4d5b2" opacity="0.56" stroke-width="0.91"/>
+<path d="M185.8,58.61 L188.23,59.43 L190.66,60.3 L193.07,61.21 L195.48,62.17" stroke="#d4d5b2" opacity="0.64" stroke-width="0.91"/>
+<path d="M197.38,62.95 L199.08,63.68 L200.76,64.43 L202.45,65.2 L204.13,65.99" stroke="#d4d5b2" opacity="0.46" stroke-width="0.91"/>
+<path d="M206.39,67.1 L207.82,67.82 L209.25,68.56 L210.67,69.32 L212.09,70.09" stroke="#d4d5b2" opacity="0.54" stroke-width="0.91"/>
+<path d="M112.85,57.07 L115.36,56.56 L117.88,56.1 L120.41,55.7 L122.96,55.35" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M124.86,55.12 L126.72,54.92 L128.58,54.75 L130.44,54.61 L132.31,54.5" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M134.66,54.39 L137.11,54.33 L139.56,54.31 L142.02,54.33 L144.49,54.4" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M147.28,54.54 L149.03,54.65 L150.78,54.79 L152.53,54.95 L154.29,55.13" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M156.25,55.36 L158.58,55.67 L160.91,56.02 L163.24,56.4 L165.57,56.83" stroke="#d4d5b2" opacity="0.61" stroke-width="0.77"/>
+<path d="M167.95,57.31 L169.56,57.66 L171.16,58.02 L172.77,58.41 L174.37,58.81" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M177.15,59.56 L179.32,60.18 L181.49,60.83 L183.65,61.52 L185.81,62.25" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M187.74,62.93 L190.45,63.93 L193.15,64.99 L195.84,66.1 L198.52,67.27" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M200.81,68.32 L202.78,69.25 L204.73,70.21 L206.68,71.2 L208.61,72.22" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M111.1,59.95 L113.33,59.5 L115.57,59.1 L117.82,58.73 L120.09,58.41" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M121.99,58.17 L123.56,57.99 L125.14,57.83 L126.72,57.7 L128.3,57.58" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M130.64,57.44 L132.8,57.34 L134.97,57.29 L137.14,57.27 L139.31,57.28" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M142.1,57.35 L144.85,57.48 L147.62,57.66 L150.38,57.9 L153.15,58.19" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M155.11,58.43 L157.16,58.71 L159.2,59.03 L161.25,59.37 L163.29,59.75" stroke="#d4d5b2" opacity="0.49" stroke-width="0.77"/>
+<path d="M165.68,60.22 L168.3,60.79 L170.91,61.41 L173.53,62.08 L176.14,62.8" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M178.92,63.62 L180.8,64.21 L182.68,64.83 L184.56,65.47 L186.43,66.14" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M188.36,66.86 L190.79,67.8 L193.21,68.79 L195.62,69.83 L198.02,70.9" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M200.32,71.98 L202.01,72.8 L203.7,73.64 L205.37,74.5 L207.05,75.39" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M109.34,62.84 L111.3,62.45 L113.26,62.09 L115.24,61.77 L117.22,61.47" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M119.12,61.22 L121.68,60.93 L124.25,60.69 L126.82,60.49 L129.41,60.35" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M131.76,60.27 L133.64,60.23 L135.53,60.22 L137.41,60.24 L139.31,60.28" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M142.1,60.4 L144.57,60.54 L147.05,60.74 L149.53,60.97 L152.01,61.26" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M153.98,61.51 L155.73,61.76 L157.49,62.04 L159.25,62.34 L161.01,62.66" stroke="#d4d5b2" opacity="0.61" stroke-width="0.77"/>
+<path d="M163.4,63.13 L165.73,63.63 L168.07,64.17 L170.4,64.75 L172.73,65.37" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M175.52,66.16 L177.13,66.65 L178.73,67.15 L180.33,67.67 L181.92,68.21" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M183.86,68.89 L186.02,69.69 L188.18,70.52 L190.33,71.38 L192.47,72.28" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M194.8,73.3 L197.49,74.53 L200.16,75.82 L202.83,77.16 L205.48,78.55" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M107.58,65.72 L109.26,65.39 L110.95,65.09 L112.65,64.8 L114.35,64.54" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M116.25,64.28 L118.52,64 L120.81,63.76 L123.09,63.57 L125.39,63.41" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M127.74,63.29 L129.33,63.24 L130.93,63.2 L132.53,63.18 L134.13,63.18" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M136.91,63.23 L139.1,63.31 L141.28,63.42 L143.47,63.57 L145.66,63.75" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M147.63,63.95 L150.4,64.27 L153.18,64.65 L155.95,65.08 L158.73,65.57" stroke="#d4d5b2" opacity="0.49" stroke-width="0.77"/>
+<path d="M161.12,66.04 L163.17,66.47 L165.22,66.93 L167.27,67.43 L169.31,67.95" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M172.12,68.72 L174.73,69.49 L177.35,70.31 L179.95,71.18 L182.56,72.1" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M184.5,72.83 L186.37,73.55 L188.25,74.3 L190.12,75.08 L191.98,75.89" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M194.31,76.93 L196.72,78.06 L199.13,79.24 L201.53,80.46 L203.91,81.72" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M105.82,68.6 L108.48,68.11 L111.15,67.66 L113.84,67.28 L116.53,66.95" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M118.45,66.75 L120.46,66.57 L122.47,66.42 L124.48,66.31 L126.5,66.22" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M128.86,66.16 L131.47,66.14 L134.08,66.17 L136.69,66.25 L139.31,66.38" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M142.12,66.58 L144.02,66.75 L145.93,66.94 L147.83,67.16 L149.74,67.41" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M151.71,67.69 L154.2,68.08 L156.69,68.53 L159.18,69.01 L161.67,69.54" stroke="#d4d5b2" opacity="0.61" stroke-width="0.77"/>
+<path d="M164.06,70.1 L165.82,70.53 L167.59,70.99 L169.34,71.47 L171.1,71.97" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M107.63,73.19 L110.04,72.85 L112.46,72.56 L114.88,72.31 L117.32,72.1" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M119.25,71.97 L120.98,71.88 L122.72,71.81 L124.46,71.76 L126.2,71.74" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M128.57,71.74 L130.9,71.78 L133.23,71.87 L135.57,71.99 L137.91,72.15" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M140.72,72.4 L142.34,72.57 L143.96,72.76 L145.58,72.97 L147.2,73.19" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M149.18,73.49 L151.38,73.86 L153.59,74.27 L155.79,74.71 L158,75.18" stroke="#d4d5b2" opacity="0.49" stroke-width="0.77"/>
+<path d="M160.4,75.74 L163.19,76.44 L165.97,77.19 L168.75,78 L171.53,78.87" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M174.34,79.81 L176.39,80.53 L178.43,81.28 L180.47,82.06 L182.51,82.87" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M184.46,83.68 L187.06,84.81 L189.66,85.98 L192.24,87.21 L194.82,88.49" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M197.15,89.69 L198.21,90.25 L199.26,90.82 L200.31,91.39 L201.35,91.97" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M100.74,76.95 L102.85,76.57 L104.97,76.23 L107.09,75.92 L109.22,75.64" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M111.14,75.42 L113.85,75.17 L116.58,74.96 L119.31,74.82 L122.05,74.73" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M124.42,74.69 L126.45,74.7 L128.49,74.73 L130.54,74.8 L132.58,74.89" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M135.39,75.07 L138.03,75.29 L140.66,75.57 L143.3,75.89 L145.95,76.26" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M147.92,76.58 L149.84,76.9 L151.76,77.26 L153.68,77.64 L155.6,78.05" stroke="#d4d5b2" opacity="0.61" stroke-width="0.77"/>
+<path d="M158,78.6 L160.5,79.22 L163,79.88 L165.5,80.59 L167.99,81.34" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M170.81,82.25 L172.58,82.85 L174.34,83.47 L176.1,84.11 L177.86,84.78" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M179.82,85.55 L182.15,86.5 L184.48,87.5 L186.8,88.53 L189.11,89.61" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M191.47,90.75 L193.06,91.54 L194.64,92.36 L196.23,93.19 L197.81,94.05" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M98.98,79.84 L100.81,79.51 L102.65,79.21 L104.5,78.94 L106.35,78.69" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M108.26,78.46 L110.69,78.21 L113.13,78.01 L115.57,77.85 L118.02,77.74" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M120.39,77.67 L122.13,77.65 L123.88,77.65 L125.63,77.67 L127.38,77.71" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M130.19,77.83 L132.53,77.97 L134.87,78.15 L137.22,78.37 L139.57,78.63" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M141.55,78.88 L143.17,79.11 L144.8,79.36 L146.43,79.62 L148.05,79.9" stroke="#d4d5b2" opacity="0.49" stroke-width="0.77"/>
+<path d="M150.46,80.36 L152.68,80.81 L154.89,81.31 L157.1,81.83 L159.31,82.39" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M162.15,83.16 L164.94,83.98 L167.73,84.86 L170.52,85.79 L173.31,86.78" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M175.28,87.51 L177.33,88.31 L179.38,89.14 L181.43,90 L183.47,90.89" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M185.85,91.96 L188.46,93.2 L191.06,94.48 L193.65,95.82 L196.24,97.21" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M97.22,82.72 L98.78,82.45 L100.34,82.19 L101.9,81.96 L103.47,81.74" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M105.39,81.5 L107.53,81.27 L109.68,81.07 L111.83,80.91 L114,80.78" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M116.35,80.68 L119.1,80.61 L121.86,80.6 L124.62,80.64 L127.39,80.74" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M130.2,80.9 L132.26,81.06 L134.31,81.24 L136.37,81.45 L138.44,81.7" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M140.42,81.96 L143.07,82.36 L145.72,82.8 L148.37,83.3 L151.03,83.85" stroke="#d4d5b2" opacity="0.61" stroke-width="0.77"/>
+<path d="M153.44,84.39 L155.36,84.86 L157.29,85.35 L159.21,85.86 L161.14,86.41" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M163.97,87.26 L166.48,88.06 L168.98,88.9 L171.48,89.8 L173.98,90.73" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M175.96,91.51 L177.72,92.23 L179.49,92.97 L181.25,93.74 L183.01,94.52" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M185.39,95.63 L187.72,96.75 L190.04,97.92 L192.36,99.13 L194.67,100.38" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M95.47,85.61 L98,85.18 L100.55,84.8 L103.11,84.47 L105.68,84.2" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M107.61,84.02 L109.48,83.88 L111.35,83.76 L113.24,83.67 L115.12,83.6" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M117.49,83.55 L119.96,83.55 L122.43,83.59 L124.92,83.68 L127.4,83.81" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M130.22,84.01 L131.99,84.17 L133.76,84.34 L135.53,84.54 L137.3,84.77" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M139.29,85.04 L141.65,85.41 L144.01,85.82 L146.38,86.26 L148.74,86.75" stroke="#d4d5b2" opacity="0.49" stroke-width="0.77"/>
+<path d="M151.16,87.29 L152.79,87.68 L154.43,88.08 L156.06,88.51 L157.7,88.96" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M160.54,89.78 L162.76,90.46 L164.98,91.18 L167.19,91.93 L169.41,92.73" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M171.39,93.46 L174.19,94.56 L176.98,95.71 L179.77,96.91 L182.55,98.18" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M184.94,99.31 L186.99,100.32 L189.03,101.37 L191.07,102.44 L193.11,103.54" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M93.71,88.49 L95.97,88.12 L98.24,87.78 L100.51,87.48 L102.8,87.23" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M104.72,87.04 L106.31,86.91 L107.9,86.79 L109.49,86.7 L111.09,86.62" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M113.45,86.54 L115.63,86.5 L117.81,86.5 L120,86.53 L122.19,86.6" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M125.01,86.74 L127.79,86.93 L130.58,87.18 L133.37,87.48 L136.17,87.84" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M138.16,88.13 L140.23,88.47 L142.3,88.83 L144.38,89.22 L146.45,89.65" stroke="#d4d5b2" opacity="0.61" stroke-width="0.77"/>
+<path d="M148.87,90.18 L151.54,90.82 L154.2,91.51 L156.87,92.25 L159.54,93.04" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M162.38,93.94 L164.31,94.59 L166.24,95.26 L168.17,95.96 L170.1,96.69" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M172.09,97.47 L174.59,98.49 L177.1,99.57 L179.6,100.69 L182.1,101.85" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M184.5,103.02 L186.26,103.91 L188.02,104.82 L189.78,105.75 L191.54,106.71" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M91.95,91.38 L93.93,91.05 L95.92,90.76 L97.92,90.49 L99.92,90.26" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M101.84,90.06 L104.42,89.84 L107.01,89.67 L109.61,89.54 L112.22,89.47" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M114.59,89.45 L116.49,89.46 L118.39,89.5 L120.3,89.56 L122.21,89.65" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M125.02,89.83 L127.52,90.03 L130.03,90.29 L132.53,90.58 L135.04,90.93" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M137.03,91.23 L138.81,91.52 L140.59,91.84 L142.38,92.18 L144.16,92.55" stroke="#d4d5b2" opacity="0.49" stroke-width="0.77"/>
+<path d="M146.59,93.08 L148.96,93.64 L151.34,94.24 L153.71,94.88 L156.09,95.56" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M158.95,96.44 L160.59,96.96 L162.23,97.51 L163.87,98.08 L165.51,98.67" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M167.5,99.41 L169.03,100 L170.57,100.61 L172.1,101.24 L173.62,101.88" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M236.36,73.42 L210.52,133.59" stroke="#b3bc97" opacity="0.28" stroke-width=".45"/>
+<path d="M235.64,73.98 L210.34,132.71" stroke="#334f41" opacity="0.271" stroke-width=".45"/>
+<path d="M234.92,74.55 L210.17,131.83" stroke="#334f41" opacity="0.262" stroke-width=".45"/>
+<path d="M234.2,75.11 L209.99,130.96" stroke="#b3bc97" opacity="0.253" stroke-width=".45"/>
+<path d="M234.93,72.33 L209.81,130.09" stroke="#334f41" opacity="0.24400000000000002" stroke-width=".45"/>
+<path d="M234.2,72.9 L209.64,129.22" stroke="#334f41" opacity="0.23500000000000004" stroke-width=".45"/>
+<path d="M233.48,73.47 L209.47,128.35" stroke="#b3bc97" opacity="0.22600000000000003" stroke-width=".45"/>
+<path d="M232.75,74.04 L209.29,127.49" stroke="#334f41" opacity="0.21700000000000003" stroke-width=".45"/>
+<path d="M233.48,71.27 L209.12,126.62" stroke="#334f41" opacity="0.20800000000000002" stroke-width=".45"/>
+<path d="M232.75,71.84 L208.95,125.76" stroke="#b3bc97" opacity="0.19900000000000004" stroke-width=".45"/>
+<path d="M232.02,72.41 L208.78,124.9" stroke="#334f41" opacity="0.19000000000000003" stroke-width=".45"/>
+<path d="M231.28,72.98 L208.61,124.05" stroke="#334f41" opacity="0.18100000000000005" stroke-width=".45"/>
+<path d="M232.03,70.22 L208.45,123.2" stroke="#b3bc97" opacity="0.17200000000000004" stroke-width=".45"/>
+<path d="M231.29,70.79 L208.28,122.34" stroke="#334f41" opacity="0.16300000000000003" stroke-width=".45"/>
+<path d="M230.55,71.36 L208.11,121.49" stroke="#334f41" opacity="0.15400000000000003" stroke-width=".45"/>
+<path d="M229.81,71.94 L207.95,120.65" stroke="#b3bc97" opacity="0.14500000000000005" stroke-width=".45"/>
+<path d="M74.78,101.13 L80.47,99.75 L86.22,98.62 L92.02,97.74 L97.88,97.11 L103.78,96.73 L109.73,96.6 L115.71,96.73 L121.72,97.12 L127.76,97.76 L133.82,98.67 L139.91,99.85 L146,101.29 L152.11,102.99 L158.22,104.97 L164.33,107.22 L170.44,109.75 L176.54,112.55 L182.63,115.63 L188.69,118.99 L194.74,122.63 L200.76,126.55 L206.74,130.77" stroke="#e1dbb2" opacity=".59" stroke-width=".7"/>
+<path d="M239.56,69.22 L244.3,65.52 L249,61.97 L253.67,58.57 L258.31,55.33 L262.93,52.24 L267.52,49.32 L272.09,46.57 L276.64,43.99 L281.18,41.59 L285.7,39.38 L290.22,37.35 L294.72,35.53 L299.23,33.9 L303.73,32.47 L308.23,31.26 L312.74,30.26 L317.26,29.49 L321.78,28.94 L326.32,28.62 L330.88,28.53 L335.45,28.69 L340.04,29.09" stroke="#dce0b7" opacity="0.68" stroke-width="0.85"/>
+<path d="M239.09,70.33 L243.86,66.63 L248.59,63.07 L253.3,59.67 L257.97,56.41 L262.63,53.32 L267.26,50.39 L271.87,47.63 L276.47,45.05 L281.05,42.65 L285.61,40.43 L290.17,38.4 L294.72,36.57 L299.27,34.94 L303.81,33.52 L308.35,32.31 L312.9,31.31 L317.45,30.54 L322.01,29.99 L326.58,29.67 L331.17,29.6 L335.77,29.76 L340.38,30.17" stroke="#dce0b7" opacity="0.2" stroke-width="0.45"/>
+<path d="M238.62,71.45 L243.41,67.74 L248.18,64.18 L252.92,60.76 L257.64,57.5 L262.33,54.4 L267,51.47 L271.65,48.7 L276.29,46.11 L280.91,43.71 L285.52,41.48 L290.13,39.45 L294.72,37.62 L299.31,35.99 L303.89,34.57 L308.48,33.35 L313.06,32.36 L317.65,31.59 L322.24,31.05 L326.85,30.73 L331.46,30.66 L336.08,30.83 L340.72,31.25" stroke="#dce0b7" opacity="0.2" stroke-width="0.45"/>
+<path d="M238.15,72.57 L242.97,68.85 L247.77,65.28 L252.55,61.85 L257.3,58.59 L262.03,55.48 L266.74,52.54 L271.44,49.77 L276.12,47.17 L280.78,44.76 L285.44,42.54 L290.08,40.51 L294.72,38.67 L299.35,37.04 L303.97,35.61 L308.6,34.4 L313.22,33.41 L317.84,32.64 L322.47,32.1 L327.11,31.79 L331.75,31.73 L336.4,31.91 L341.06,32.34" stroke="#dce0b7" opacity="0.2" stroke-width="0.45"/>
+<path d="M237.68,73.69 L242.53,69.96 L247.37,66.38 L252.18,62.95 L256.96,59.67 L261.73,56.56 L266.49,53.61 L271.22,50.84 L275.94,48.24 L280.65,45.82 L285.35,43.59 L290.03,41.56 L294.71,39.72 L299.39,38.08 L304.05,36.66 L308.72,35.45 L313.38,34.46 L318.04,33.69 L322.7,33.15 L327.37,32.85 L332.04,32.79 L336.72,32.98 L341.4,33.42" stroke="#dce0b7" opacity="0.2" stroke-width="0.45"/>
+<path d="M237.21,74.8 L242.09,71.07 L246.96,67.48 L251.8,64.04 L256.63,60.76 L261.44,57.64 L266.23,54.68 L271,51.9 L275.77,49.3 L280.52,46.88 L285.26,44.64 L289.99,42.61 L294.71,40.77 L299.42,39.13 L304.13,37.7 L308.84,36.49 L313.54,35.5 L318.24,34.74 L322.93,34.21 L327.63,33.91 L332.33,33.86 L337.03,34.05 L341.74,34.5" stroke="#dce0b7" opacity="0.2" stroke-width="0.45"/>
+<path d="M236.74,75.92 L241.65,72.18 L246.55,68.58 L251.43,65.13 L256.29,61.84 L261.14,58.72 L265.97,55.76 L270.79,52.97 L275.59,50.36 L280.39,47.93 L285.17,45.7 L289.94,43.66 L294.71,41.81 L299.46,40.18 L304.21,38.75 L308.96,37.54 L313.7,36.55 L318.43,35.79 L323.16,35.26 L327.89,34.97 L332.62,34.92 L337.35,35.13 L342.08,35.58" stroke="#dce0b7" opacity="0.2" stroke-width="0.45"/>
+<path d="M339.81,30.3 L358.88,91.43" stroke="#cdd3aa" stroke-width=".55" opacity="0.63"/>
+<path d="M340.66,30.4 L359.95,91.63" stroke="#cdd3aa" stroke-width=".55" opacity="0.35"/>
+<path d="M341.51,30.5 L361.01,91.83" stroke="#cdd3aa" stroke-width=".55" opacity="0.35"/>
+<path d="M252.54,69.05 L254.23,67.95 L255.93,66.87 L257.62,65.81 L259.32,64.77" stroke="#d4d5b2" opacity="0.44" stroke-width="0.91"/>
+<path d="M260.94,63.78 L263.11,62.5 L265.28,61.24 L267.44,60.02 L269.61,58.83" stroke="#d4d5b2" opacity="0.51" stroke-width="0.91"/>
+<path d="M271.58,57.78 L273.14,56.96 L274.71,56.16 L276.28,55.38 L277.84,54.62" stroke="#d4d5b2" opacity="0.59" stroke-width="0.91"/>
+<path d="M280.15,53.52 L282.18,52.59 L284.22,51.69 L286.25,50.83 L288.29,49.99" stroke="#d4d5b2" opacity="0.66" stroke-width="0.91"/>
+<path d="M289.89,49.35 L291.33,48.8 L292.77,48.27 L294.21,47.75 L295.64,47.25" stroke="#d4d5b2" opacity="0.49" stroke-width="0.91"/>
+<path d="M297.59,46.6 L299.49,45.99 L301.4,45.42 L303.3,44.87 L305.2,44.36" stroke="#d4d5b2" opacity="0.56" stroke-width="0.91"/>
+<path d="M307.47,43.79 L308.78,43.49 L310.09,43.19 L311.4,42.92 L312.7,42.66" stroke="#d4d5b2" opacity="0.64" stroke-width="0.91"/>
+<path d="M314.29,42.37 L316.06,42.07 L317.83,41.8 L319.6,41.56 L321.37,41.35" stroke="#d4d5b2" opacity="0.46" stroke-width="0.91"/>
+<path d="M323.28,41.16 L325.13,41.01 L326.97,40.89 L328.82,40.81 L330.66,40.77" stroke="#d4d5b2" opacity="0.54" stroke-width="0.91"/>
+<path d="M247,75.21 L248.48,74.22 L249.97,73.24 L251.46,72.28 L252.95,71.33" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M254.61,70.28 L256.58,69.06 L258.56,67.86 L260.54,66.69 L262.51,65.54" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M264.53,64.4 L265.89,63.64 L267.26,62.89 L268.62,62.16 L269.98,61.43" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M272.35,60.21 L274.2,59.28 L276.05,58.38 L277.9,57.5 L279.74,56.64" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M281.4,55.9 L283.73,54.88 L286.06,53.91 L288.38,52.97 L290.71,52.08" stroke="#d4d5b2" opacity="0.61" stroke-width="0.77"/>
+<path d="M292.71,51.35 L294.42,50.75 L296.13,50.17 L297.85,49.61 L299.56,49.08" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M301.9,48.39 L304.08,47.79 L306.27,47.23 L308.45,46.71 L310.63,46.23" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M312.26,45.9 L313.83,45.61 L315.4,45.33 L316.98,45.08 L318.54,44.86" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M320.51,44.6 L322.55,44.38 L324.58,44.2 L326.62,44.06 L328.65,43.96" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M245.87,78.43 L248.27,76.86 L250.66,75.33 L253.05,73.83 L255.45,72.37" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M257.15,71.35 L258.92,70.31 L260.69,69.29 L262.46,68.28 L264.23,67.3" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M266.29,66.18 L268.56,64.98 L270.83,63.82 L273.1,62.69 L275.37,61.59" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M277.79,60.46 L279.44,59.72 L281.08,58.99 L282.72,58.29 L284.36,57.6" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M286.05,56.91 L288.18,56.08 L290.32,55.27 L292.45,54.5 L294.58,53.77" stroke="#d4d5b2" opacity="0.49" stroke-width="0.77"/>
+<path d="M296.62,53.1 L298.12,52.62 L299.63,52.17 L301.13,51.73 L302.63,51.31" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M305.02,50.68 L307.01,50.19 L309,49.73 L310.98,49.31 L312.96,48.92" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M314.62,48.62 L315.98,48.4 L317.34,48.19 L318.7,47.99 L320.06,47.82" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M322.06,47.58 L323.9,47.41 L325.73,47.26 L327.56,47.15 L329.39,47.06" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M244.75,81.65 L246.94,80.23 L249.12,78.85 L251.31,77.49 L253.5,76.16" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M255.24,75.12 L256.79,74.21 L258.34,73.32 L259.9,72.44 L261.45,71.57" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M263.56,70.42 L265.63,69.31 L267.69,68.24 L269.76,67.19 L271.83,66.17" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M274.31,64.98 L275.74,64.32 L277.16,63.67 L278.59,63.03 L280.01,62.41" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M281.75,61.67 L283.68,60.87 L285.62,60.09 L287.55,59.34 L289.48,58.62" stroke="#d4d5b2" opacity="0.61" stroke-width="0.77"/>
+<path d="M291.58,57.87 L294.01,57.03 L296.44,56.24 L298.87,55.5 L301.29,54.8" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M303.74,54.14 L305.53,53.68 L307.31,53.26 L309.09,52.86 L310.87,52.48" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M312.57,52.15 L314.84,51.74 L317.1,51.38 L319.36,51.06 L321.61,50.79" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M323.65,50.58 L325.28,50.44 L326.9,50.33 L328.52,50.24 L330.13,50.17" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M243.63,84.86 L245.6,83.61 L247.56,82.37 L249.54,81.16 L251.51,79.96" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M253.28,78.91 L255.78,77.46 L258.28,76.04 L260.79,74.66 L263.29,73.32" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M265.45,72.2 L267.3,71.25 L269.15,70.33 L271.01,69.43 L272.86,68.55" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M275.4,67.38 L277.77,66.32 L280.15,65.3 L282.52,64.32 L284.89,63.38" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M286.66,62.7 L288.38,62.06 L290.09,61.44 L291.8,60.84 L293.52,60.27" stroke="#d4d5b2" opacity="0.49" stroke-width="0.77"/>
+<path d="M295.66,59.57 L297.88,58.89 L300.11,58.24 L302.32,57.63 L304.54,57.06" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M307.04,56.46 L308.6,56.1 L310.16,55.77 L311.72,55.46 L313.27,55.17" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M315.01,54.86 L317.06,54.54 L319.12,54.24 L321.16,53.99 L323.21,53.77" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M325.28,53.58 L326.69,53.48 L328.08,53.4 L329.48,53.33 L330.87,53.28" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M242.5,88.08 L244.24,86.98 L245.99,85.9 L247.73,84.83 L249.48,83.78" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M251.28,82.71 L253.57,81.39 L255.85,80.09 L258.14,78.83 L260.43,77.59" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M262.64,76.43 L264.26,75.6 L265.89,74.78 L267.51,73.97 L269.14,73.18" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M271.74,71.95 L273.9,70.96 L276.06,70 L278.22,69.07 L280.38,68.17" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M282.2,67.43 L283.69,66.85 L285.18,66.27 L286.67,65.72 L288.15,65.17" stroke="#d4d5b2" opacity="0.61" stroke-width="0.77"/>
+<path d="M290.35,64.4 L292.37,63.71 L294.38,63.06 L296.4,62.43 L298.41,61.83" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M300.97,61.11 L302.18,60.78 L303.39,60.47 L304.6,60.17 L305.81,59.88" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M245.43,91.1 L246.97,90.19 L248.51,89.3 L250.05,88.42 L251.59,87.55" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M253.47,86.51 L255.57,85.37 L257.67,84.25 L259.78,83.15 L261.89,82.08" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M264.18,80.95 L266.85,79.67 L269.52,78.42 L272.19,77.22 L274.86,76.06" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M277.57,74.93 L279.54,74.13 L281.51,73.35 L283.48,72.6 L285.45,71.87" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M287.34,71.2 L289.86,70.33 L292.38,69.51 L294.9,68.72 L297.41,67.98" stroke="#d4d5b2" opacity="0.49" stroke-width="0.77"/>
+<path d="M299.69,67.34 L301.5,66.86 L303.31,66.4 L305.11,65.96 L306.92,65.55" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M309.57,64.98 L311.91,64.52 L314.24,64.1 L316.56,63.72 L318.87,63.39" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M320.7,63.15 L322.33,62.97 L323.95,62.8 L325.57,62.65 L327.19,62.53" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M329.37,62.4 L331.07,62.32 L332.76,62.28 L334.44,62.25 L336.12,62.25" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M239.25,97.39 L241.79,95.85 L244.33,94.34 L246.88,92.86 L249.43,91.42" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M251.34,90.36 L253.2,89.35 L255.06,88.36 L256.92,87.38 L258.79,86.43" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M261.13,85.25 L263.57,84.07 L266.01,82.91 L268.45,81.78 L270.89,80.69" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M273.65,79.5 L275.38,78.77 L277.11,78.06 L278.84,77.37 L280.57,76.7" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M282.51,75.97 L284.8,75.12 L287.1,74.31 L289.39,73.54 L291.68,72.79" stroke="#d4d5b2" opacity="0.61" stroke-width="0.77"/>
+<path d="M294.02,72.06 L295.59,71.59 L297.17,71.14 L298.74,70.7 L300.31,70.28" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M303.04,69.58 L305.16,69.07 L307.28,68.59 L309.4,68.15 L311.51,67.73" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M313.39,67.39 L316.04,66.95 L318.68,66.56 L321.3,66.23 L323.92,65.94" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M326.16,65.75 L328.07,65.61 L329.98,65.5 L331.87,65.42 L333.76,65.38" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M238.13,100.61 L240.42,99.23 L242.73,97.87 L245.03,96.54 L247.35,95.23" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M249.29,94.16 L250.9,93.29 L252.5,92.43 L254.11,91.58 L255.72,90.75" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M258.11,89.54 L260.3,88.46 L262.5,87.4 L264.69,86.37 L266.89,85.36" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M269.71,84.1 L272.5,82.91 L275.28,81.75 L278.07,80.64 L280.85,79.58" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M282.83,78.85 L284.88,78.11 L286.93,77.4 L288.99,76.72 L291.04,76.05" stroke="#d4d5b2" opacity="0.49" stroke-width="0.77"/>
+<path d="M293.42,75.32 L296.04,74.55 L298.65,73.82 L301.26,73.13 L303.87,72.49" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M306.64,71.86 L308.51,71.46 L310.38,71.08 L312.25,70.73 L314.11,70.41" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M316.02,70.09 L318.43,69.74 L320.83,69.43 L323.22,69.16 L325.6,68.93" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M327.87,68.76 L329.54,68.65 L331.2,68.58 L332.86,68.52 L334.51,68.49" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M237.01,103.83 L239.05,102.61 L241.1,101.41 L243.16,100.23 L245.22,99.07" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M247.2,97.97 L249.86,96.54 L252.53,95.14 L255.2,93.77 L257.87,92.44" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M260.31,91.26 L262.25,90.34 L264.2,89.44 L266.15,88.56 L268.1,87.7" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M270.97,86.46 L273.52,85.41 L276.07,84.39 L278.61,83.41 L281.16,82.46" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M283.17,81.73 L284.97,81.1 L286.77,80.49 L288.57,79.9 L290.36,79.32" stroke="#d4d5b2" opacity="0.61" stroke-width="0.77"/>
+<path d="M292.8,78.57 L295.18,77.87 L297.55,77.21 L299.93,76.58 L302.29,75.99" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M305.12,75.32 L306.75,74.96 L308.37,74.62 L309.99,74.29 L311.6,73.99" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M313.56,73.64 L315.74,73.28 L317.91,72.95 L320.08,72.66 L322.23,72.4" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M324.56,72.16 L327.26,71.94 L329.94,71.76 L332.6,71.65 L335.25,71.59" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M235.88,107.04 L237.67,105.99 L239.46,104.95 L241.25,103.92 L243.05,102.91" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M245.07,101.8 L247.47,100.5 L249.89,99.23 L252.3,97.98 L254.73,96.77" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M257.2,95.55 L258.88,94.75 L260.56,93.96 L262.24,93.18 L263.93,92.42" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M266.86,91.12 L269.15,90.14 L271.44,89.19 L273.74,88.26 L276.03,87.36" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M278.09,86.58 L280.99,85.51 L283.88,84.49 L286.78,83.52 L289.67,82.59" stroke="#d4d5b2" opacity="0.49" stroke-width="0.77"/>
+<path d="M292.15,81.83 L294.28,81.21 L296.4,80.61 L298.53,80.04 L300.64,79.5" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M303.54,78.8 L306.24,78.19 L308.93,77.63 L311.61,77.12 L314.28,76.65" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M316.27,76.33 L318.19,76.05 L320.1,75.8 L322.01,75.57 L323.91,75.37" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M326.28,75.15 L328.73,74.97 L331.16,74.83 L333.59,74.74 L335.99,74.7" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M234.76,110.26 L237.62,108.6 L240.5,106.97 L243.39,105.37 L246.29,103.82" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M248.35,102.74 L250.51,101.63 L252.67,100.55 L254.83,99.49 L257,98.45" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M259.53,97.26 L262.32,95.99 L265.12,94.76 L267.92,93.56 L270.72,92.41" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M273.71,91.22 L275.74,90.43 L277.77,89.67 L279.8,88.93 L281.83,88.21" stroke="#d4d5b2" opacity="0.54" stroke-width="0.77"/>
+<path d="M283.92,87.5 L286.57,86.62 L289.21,85.79 L291.84,84.99 L294.47,84.23" stroke="#d4d5b2" opacity="0.61" stroke-width="0.77"/>
+<path d="M297,83.54 L298.85,83.05 L300.71,82.58 L302.56,82.14 L304.4,81.71" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M307.34,81.08 L309.78,80.59 L312.21,80.14 L314.62,79.73 L317.03,79.36" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M319.05,79.07 L320.7,78.86 L322.35,78.67 L323.99,78.49 L325.62,78.34" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M328.02,78.15 L330.22,78.01 L332.4,77.9 L334.58,77.84 L336.73,77.81" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M233.64,113.48 L236.24,111.98 L238.86,110.5 L241.49,109.06 L244.13,107.65" stroke="#d4d5b2" opacity="0.44" stroke-width="0.77"/>
+<path d="M246.23,106.55 L248.11,105.58 L249.99,104.63 L251.88,103.7 L253.78,102.78" stroke="#d4d5b2" opacity="0.51" stroke-width="0.77"/>
+<path d="M256.35,101.56 L258.87,100.39 L261.4,99.25 L263.94,98.14 L266.47,97.07" stroke="#d4d5b2" opacity="0.59" stroke-width="0.77"/>
+<path d="M269.52,95.81 L271.28,95.11 L273.03,94.43 L274.79,93.76 L276.54,93.1" stroke="#d4d5b2" opacity="0.66" stroke-width="0.77"/>
+<path d="M278.68,92.33 L281.06,91.49 L283.44,90.68 L285.82,89.89 L288.2,89.14" stroke="#d4d5b2" opacity="0.49" stroke-width="0.77"/>
+<path d="M290.79,88.36 L293.78,87.5 L296.77,86.68 L299.75,85.92 L302.72,85.21" stroke="#d4d5b2" opacity="0.56" stroke-width="0.77"/>
+<path d="M305.72,84.54 L307.91,84.09 L310.08,83.66 L312.25,83.27 L314.41,82.9" stroke="#d4d5b2" opacity="0.64" stroke-width="0.77"/>
+<path d="M316.47,82.58 L317.96,82.36 L319.45,82.16 L320.94,81.97 L322.42,81.8" stroke="#d4d5b2" opacity="0.46" stroke-width="0.77"/>
+<path d="M236.82,73.42 L211.09,133.6" stroke="#b3bc97" opacity="0.28" stroke-width=".45"/>
+<path d="M236.8,74 L211.76,132.75" stroke="#334f41" opacity="0.271" stroke-width=".45"/>
+<path d="M236.78,74.58 L212.43,131.9" stroke="#334f41" opacity="0.262" stroke-width=".45"/>
+<path d="M236.76,75.15 L213.11,131.05" stroke="#b3bc97" opacity="0.253" stroke-width=".45"/>
+<path d="M238.15,72.38 L213.77,130.2" stroke="#334f41" opacity="0.24400000000000002" stroke-width=".45"/>
+<path d="M238.13,72.95 L214.44,129.35" stroke="#334f41" opacity="0.23500000000000004" stroke-width=".45"/>
+<path d="M238.12,73.53 L215.11,128.5" stroke="#b3bc97" opacity="0.22600000000000003" stroke-width=".45"/>
+<path d="M238.1,74.11 L215.77,127.66" stroke="#334f41" opacity="0.21700000000000003" stroke-width=".45"/>
+<path d="M239.48,71.34 L216.44,126.81" stroke="#334f41" opacity="0.20800000000000002" stroke-width=".45"/>
+<path d="M239.47,71.92 L217.1,125.97" stroke="#b3bc97" opacity="0.19900000000000004" stroke-width=".45"/>
+<path d="M239.46,72.49 L217.76,125.13" stroke="#334f41" opacity="0.19000000000000003" stroke-width=".45"/>
+<path d="M239.45,73.07 L218.42,124.29" stroke="#334f41" opacity="0.18100000000000005" stroke-width=".45"/>
+<path d="M240.81,70.31 L219.08,123.45" stroke="#b3bc97" opacity="0.17200000000000004" stroke-width=".45"/>
+<path d="M240.8,70.89 L219.73,122.61" stroke="#334f41" opacity="0.16300000000000003" stroke-width=".45"/>
+<path d="M240.8,71.47 L220.39,121.77" stroke="#334f41" opacity="0.15400000000000003" stroke-width=".45"/>
+<path d="M240.8,72.05 L221.04,120.94" stroke="#b3bc97" opacity="0.14500000000000005" stroke-width=".45"/>
+<path d="M215.76,130.5 L222.08,126.51 L228.5,122.67 L235.02,118.99 L241.62,115.48 L248.28,112.15 L255,109 L261.76,106.05 L268.54,103.3 L275.34,100.75 L282.14,98.42 L288.92,96.32 L295.68,94.45 L302.4,92.82 L309.06,91.43 L315.66,90.3 L322.18,89.43 L328.6,88.83 L334.92,88.51 L341.12,88.47 L347.18,88.73 L353.1,89.28 L358.86,90.15" stroke="#e1dbb2" opacity=".59" stroke-width=".7"/>
+<path d="M239 68 Q223 107 209 138" stroke="#c5cba5" stroke-width="1"/>
+<!-- A pressed sprig rests in the fold. -->
+<path d="M217 123 C236 100 240 78 248 62 C254 48 257 31 272 11" stroke="#315141" stroke-width="3.4"/>
+<path d="M217 122 C235 100 239 78 247.5 62 C253.5 48 257 31 272 11" stroke="#d6c995" stroke-width="1.35"/>
+<path d="M236,90 Q235.63,71.72 214,62 Q213.74,79.41 236,90Z" fill="url(#fol-leaf)" stroke="#c3c699" stroke-width=".9"/>
+<path d="M236,90 Q223.33,75.5 214,62" stroke="#d8d2a4" stroke-width=".77"/>
+<path d="M231.81,85.14 Q231.37,82.68 232.12,79.33 M231.41,84.64 Q228.6,84.04 225.98,83.38" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M228.57,81.25 Q228.51,78.49 229.74,74.76 M228.18,80.75 Q225.19,80.29 222.25,79.88" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M225.4,77.32 Q225.38,74.52 226.6,70.8 M225,76.81 Q222.07,76.31 219.14,75.9" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M222.29,73.33 Q221.98,70.76 222.7,67.43 M221.9,72.82 Q219.25,72.09 216.65,71.42" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M241,78 Q259.61,80.18 271,59 Q255.34,59.49 241,78Z" fill="url(#fol-leaf)" stroke="#c3c699" stroke-width=".9"/>
+<path d="M241,78 Q257.74,68.58 271,59" stroke="#d8d2a4" stroke-width=".77"/>
+<path d="M246.56,74.83 Q249.25,74.97 252.26,75.68 M247.1,74.49 Q248.35,72.35 249.29,69.85" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M250.89,72.25 Q253.68,72.53 256.98,73.7 M251.43,71.91 Q252.43,69.37 253.17,66.56" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M255.19,69.6 Q257.93,69.83 261.23,70.99 M255.73,69.26 Q256.7,66.68 257.44,63.87" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M259.44,66.89 Q262.02,66.86 265.02,67.54 M259.98,66.55 Q261.14,64.28 262.09,61.79" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M246,65 Q248.45,44.23 225,31 Q225.36,48.63 246,65Z" fill="url(#fol-leaf)" stroke="#c3c699" stroke-width=".9"/>
+<path d="M246,65 Q235.51,46.11 225,31" stroke="#d8d2a4" stroke-width=".77"/>
+<path d="M242.47,58.72 Q242.62,55.72 243.44,52.35 M242.09,58.11 Q239.7,56.68 236.91,55.58" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M239.61,53.82 Q239.93,50.71 241.26,47.03 M239.23,53.21 Q236.4,52.05 233.27,51.16" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M236.68,48.96 Q236.94,45.89 238.26,42.21 M236.3,48.35 Q233.42,47.22 230.3,46.33" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M233.68,44.15 Q233.66,41.25 234.44,37.9 M233.3,43.53 Q230.77,42.19 228.01,41.07" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M254,47 Q271.01,49.74 280,30 Q265.85,29.93 254,47Z" fill="url(#fol-leaf)" stroke="#c3c699" stroke-width=".9"/>
+<path d="M254,47 Q268.59,38.66 280,30" stroke="#d8d2a4" stroke-width=".77"/>
+<path d="M258.84,44.19 Q261.3,44.42 264.07,45.2 M259.31,43.88 Q260.32,41.9 261.01,39.55" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M262.61,41.89 Q265.15,42.26 268.22,43.48 M263.08,41.59 Q263.83,39.21 264.32,36.56" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M266.34,39.53 Q268.84,39.84 271.9,41.05 M266.8,39.22 Q267.53,36.81 268.02,34.16" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M270.02,37.1 Q272.36,37.16 275.11,37.91 M270.49,36.79 Q271.4,34.68 272.11,32.34" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M258.5,35 Q262.41,22.61 249,13 Q246.13,24.16 258.5,35Z" fill="url(#fol-leaf)" stroke="#c3c699" stroke-width=".9"/>
+<path d="M258.5,35 Q253.37,23.12 249,13" stroke="#d8d2a4" stroke-width=".77"/>
+<path d="M256.79,31.04 Q257.14,29.27 258.23,27.21 M256.62,30.64 Q255.01,29.72 253.32,28.88" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M255.44,27.92 Q256.01,26.05 257.49,23.82 M255.27,27.52 Q253.42,26.7 251.47,25.98" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M254.09,24.79 Q254.66,22.93 256.13,20.7 M253.92,24.4 Q252.08,23.57 250.13,22.85" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M252.74,21.67 Q253.08,19.91 254.14,17.85 M252.57,21.27 Q250.98,20.34 249.31,19.5" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M264,24 Q273.6,20.91 277,8 Q268.52,11.2 264,24Z" fill="url(#fol-leaf)" stroke="#c3c699" stroke-width=".9"/>
+<path d="M264,24 Q271.02,15.36 277,8" stroke="#d8d2a4" stroke-width=".77"/>
+<path d="M266.34,21.12 Q267.66,20.54 269.36,20.31 M266.57,20.83 Q266.82,19.39 266.99,17.93" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M268.19,18.85 Q269.63,18.37 271.55,18.31 M268.42,18.56 Q268.54,17.01 268.56,15.43" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M270.03,16.58 Q271.47,16.1 273.39,16.03 M270.27,16.29 Q270.39,14.74 270.41,13.17" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+<path d="M271.88,14.3 Q273.19,13.72 274.88,13.48 M272.11,14.02 Q272.37,12.58 272.55,11.13" stroke="#c8cb99" stroke-width=".51" opacity=".77"/>
+</g>
+</svg></div>
+    </section>
+    <div class="workspace">
+      <section class="panel notes-panel" aria-labelledby="notes-title">
+        <div class="panel-head">
+          <span class="section-icon sage"><i data-icon="notes"></i></span>
+          <h2 id="notes-title">Appunti</h2>
+        </div>
+        <form id="source-form" class="notes-form">
+          <div class="field-heading"><label for="notes">Testo di partenza</label><i data-icon="edit"></i></div>
+          <div class="paper-input">
+            <textarea id="notes" rows="9" spellcheck="true" placeholder="Descrivi l’argomento o incolla qui i tuoi appunti…" aria-describedby="word-count"></textarea>
+            <div class="paper-foot"><i data-icon="align"></i><span id="word-count">0 parole</span></div>
+          </div>
+          <p id="source-error" role="alert" class="error-msg" hidden></p>
+          <button class="btn btn-forest generate" id="generate" type="submit"><i data-icon="sparkles"></i><span>Genera quiz</span></button>
+          <button class="cancel-load" id="cancel-load" type="button" hidden>Annulla generazione</button>
+        </form>
+      </section>
+      <section class="panel quiz-panel" aria-labelledby="quiz-title" aria-busy="false">
+        <div class="panel-head">
+          <span class="section-icon apricot"><i data-icon="cards"></i></span>
+          <h2 id="quiz-title">Quiz di studio</h2>
+          <span class="mode-badge" id="mode-badge">Esempio</span>
+        </div>
+        <div id="quiz-view" class="quiz-body">
+          <nav id="question-nav" class="question-nav" aria-label="Naviga tra le domande"></nav>
+          <div class="question-paper">
+            <div class="question-label"><span></span><span id="question-count">Domanda 01 / 10</span></div>
+            <h3 id="question-title" tabindex="-1"></h3>
+          </div>
+          <fieldset id="options" class="options" aria-labelledby="question-title"></fieldset>
+          <p id="feedback" class="feedback" hidden></p>
+          <div class="quiz-actions">
+            <div class="step-buttons">
+              <button id="prev" class="square" type="button" aria-label="Domanda precedente" title="Domanda precedente"><i data-icon="left"></i></button>
+              <button id="next" class="square" type="button" aria-label="Domanda successiva" title="Domanda successiva"><i data-icon="right"></i></button>
+            </div>
+            <button id="confirm" class="btn btn-clay" type="button"><i data-icon="check"></i><span>Conferma risposta</span></button>
+          </div>
+        </div>
+        <div class="empty-quiz" id="empty-quiz" hidden>
+          <span class="empty-icon"><i data-icon="cards"></i></span>
+          <h3>Il tuo prossimo quiz</h3>
+          <p>Scrivi gli appunti e scegli «Genera quiz» per iniziare.</p>
+          <button id="demo" type="button" class="text-button">Prova il quiz di esempio</button>
+        </div>
+        <div class="empty-quiz loading" id="loading" role="status" hidden>
+          <span class="spinner" aria-hidden="true"></span><h3>Preparazione del quiz…</h3><p>Il server sta elaborando i tuoi appunti.</p>
+        </div>
+      </section>
+      <section class="panel stats-panel" aria-labelledby="stats-title">
+        <div class="panel-head"><span class="section-icon wheat"><i data-icon="chart"></i></span><h2 id="stats-title">Riepilogo</h2></div>
+        <div class="stats-body">
+          <div class="chart" role="img" id="chart" aria-label="0 risposte su 10">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 120 120"><g id="ring" transform="rotate(-90 60 60)"></g></svg>
+            <div class="chart-caption" aria-hidden="true"><div><b id="total-done">0</b><span id="total-size">/10</span></div><small>confermate</small></div>
+          </div>
+          <dl class="legend">
+            <div><dt><span class="dot dot-green"></span>Corrette</dt><dd id="correct-count">0</dd></div>
+            <div><dt><span class="dot dot-clay"></span>Errate</dt><dd id="incorrect-count">0</dd></div>
+            <div><dt><span class="dot dot-neutral"></span>Da rispondere</dt><dd id="pending-count">10</dd></div>
+          </dl>
+          <div class="accuracy">
+            <div><span><i data-icon="target"></i>Precisione</span><strong id="accuracy-value">—</strong></div>
+            <div class="track" aria-hidden="true"><div id="accuracy-bar"></div></div>
+          </div>
+          <button type="button" id="results" class="results-btn" hidden>Vedi risultato</button>
+        </div>
+      </section>
+    </div>
+    <footer><span><i data-icon="book"></i>Folia <em>/</em> Notebook di studio</span><span id="save-state"><i data-icon="device"></i><span>Sessione salvata nella scheda</span></span></footer>
+  </main>
+  <dialog id="modal" aria-labelledby="modal-title">
+    <div class="dialog-inner">
+      <button class="square close" id="close-modal" type="button" aria-label="Chiudi"><i data-icon="close"></i></button>
+      <span class="section-icon sage dialog-icon" id="dialog-icon"><i data-icon="book"></i></span>
+      <h2 id="modal-title"></h2>
+      <div id="modal-copy"></div>
+      <div id="modal-actions"></div>
+    </div>
+  </dialog>
+  <p id="announce" class="sr-only" role="status"></p>
+  <script>
+const QuizCore = (() => {
+  "use strict";
+
+  const letters = ["a", "b", "c", "d"];
+  const demoText = `La fotosintesi permette alle piante di trasformare l’energia luminosa in energia chimica. Avviene nei cloroplasti delle cellule vegetali. Al loro interno, la clorofilla assorbe soprattutto luce rossa e blu e riflette parte della luce verde, dando alle foglie il loro colore caratteristico.
+
+Nella fase luminosa, che si svolge nelle membrane dei tilacoidi, l’acqua viene scissa e si libera ossigeno. L’energia raccolta viene trasferita alle molecole di ATP e NADPH.
+
+Nello stroma, la parte fluida del cloroplasto, il ciclo di Calvin utilizza ATP e NADPH per incorporare il carbonio dell’anidride carbonica in molecole organiche. Da queste la pianta può ricavare zuccheri che usa per crescere.`;
+
+  function example(id, question, a, b, c, d, correct) {
+    return { id_question: id, question, options: { a, b, c, d }, correct_answer: correct };
+  }
+
+  const demoQuestions = [
+    example(1, "In quale organulo della cellula vegetale avviene la fotosintesi?",
+      "Mitocondrio", "Cloroplasto", "Nucleo", "Apparato di Golgi", "b"),
+    example(2, "Quale trasformazione energetica avviene durante la fotosintesi?",
+      "Da energia chimica a luminosa", "Da energia termica a meccanica",
+      "Da energia meccanica a elettrica", "Da energia luminosa a chimica", "d"),
+    example(3, "Quale pigmento cattura la luce nei cloroplasti?",
+      "Clorofilla", "Melanina", "Emoglobina", "Cheratina", "a"),
+    example(4, "Quali colori della luce vengono assorbiti maggiormente dalla clorofilla?",
+      "Verde e giallo", "Giallo e arancione", "Rosso e blu", "Blu e verde", "c"),
+    example(5, "Perché le foglie ci appaiono verdi?",
+      "Trasformano tutta la luce in luce verde", "Riflettono parte della luce verde",
+      "Assorbono solo la luce verde", "Producono luce verde nello stroma", "b"),
+    example(6, "Dove si svolge la fase luminosa della fotosintesi?",
+      "Nelle membrane dei tilacoidi", "Nel nucleo", "Nello stroma", "Nel citoplasma", "a"),
+    example(7, "Quale sostanza viene scissa per liberare ossigeno?",
+      "Il glucosio", "L’anidride carbonica", "La clorofilla", "L’acqua", "d"),
+    example(8, "Quali molecole trasferiscono l’energia raccolta alla fase successiva?",
+      "DNA e RNA", "Acqua e ossigeno", "ATP e NADPH", "Glucosio e amido", "c"),
+    example(9, "In quale parte del cloroplasto si svolge il ciclo di Calvin?",
+      "Nello stroma", "Sulla membrana esterna", "Nel lume dei tilacoidi", "Tra le due membrane esterne", "a"),
+    example(10, "Da quale sostanza proviene il carbonio incorporato durante il ciclo di Calvin?",
+      "Dall’ossigeno", "Dall’anidride carbonica", "Dall’acqua", "Dall’azoto", "b")
+  ];
+
+  function isObject(value) {
+    return value !== null && typeof value === "object" && !Array.isArray(value);
+  }
+
+  function isQuestion(value) {
+    return isObject(value) && Number.isInteger(value.id_question) &&
+      typeof value.question === "string" && isObject(value.options) &&
+      letters.every(letter => typeof value.options[letter] === "string") &&
+      letters.includes(value.correct_answer);
+  }
+
+  function isQuiz(questions) {
+    return Array.isArray(questions) && questions.length === 10 && questions.every(isQuestion);
+  }
+
+  function abortIfNeeded(error, signal) {
+    if (signal?.aborted) throw signal.reason ?? error;
+    if (error?.name === "AbortError") throw error;
+  }
+
+  async function generate(text, signal) {
+    let response;
+    try {
+      response = await fetch("/api/quizzes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ text }),
+        signal
+      });
+    } catch (error) {
+      abortIfNeeded(error, signal);
+      throw new Error("Il server non è raggiungibile. Controlla la connessione e riprova.");
+    }
+
+    if ([404, 405, 501].includes(response.status)) {
+      throw new Error(`Il server non espone POST /api/quizzes (HTTP ${response.status}). Apri il notebook sul server dell’API.`);
+    }
+    if (!response.ok && response.status !== 422) {
+      throw new Error(`Il server ha restituito un errore (HTTP ${response.status}). Riprova tra poco.`);
+    }
+
+    let data;
+    try {
+      data = await response.json();
+    } catch (error) {
+      abortIfNeeded(error, signal);
+      if (response.status !== 422) throw new Error("La risposta del server non contiene un quiz in formato JSON.");
+    }
+
+    if (response.status === 422) {
+      const message = Array.isArray(data?.detail) && data.detail.find(item => typeof item?.msg === "string")?.msg;
+      const detail = message && message.slice(0, 160).trim();
+      throw new Error(detail && !/[<>]/.test(detail)
+        ? `Il server ha rifiutato il testo. ${detail}`
+        : "Il server ha rifiutato il testo. Verifica gli appunti e riprova.");
+    }
+
+    const questions = data?.quiz?.questions;
+    if (!isQuiz(questions)) {
+      throw new Error("Il server ha inviato un quiz incompleto o in un formato imprevisto.");
+    }
+    return questions;
+  }
+
+  return { demoText, demoQuestions, generate, isQuiz };
+})();
+(() => {
+  "use strict";
+
+  const $ = (id) => document.getElementById(id);
+  const letters = ["a", "b", "c", "d"];
+  const key = "folia.quiz.notebook.v1";
+  const notes = $("notes");
+  const modal = $("modal");
+  const icons = document.querySelectorAll("[data-icon]");
+  const svgNS = "http://www.w3.org/2000/svg";
+  let pending = null;
+  let saveTimer = 0;
+  let session = restore();
+  let opener = null;
+
+  function makeSession(demo = false) {
+    return {
+      notes: demo ? QuizCore.demoText : "",
+      questions: demo ? QuizCore.demoQuestions : [],
+      isDemo: demo, index: 0,
+      picks: Array(10).fill(null), answers: Array(10).fill(null)
+    };
+  }
+
+  function restore() {
+    try {
+      const data = JSON.parse(sessionStorage.getItem(key));
+      if (typeof data?.notes === "string" && typeof data.isDemo === "boolean" &&
+          Array.isArray(data.questions) && (data.questions.length === 0 || QuizCore.isQuiz(data.questions)) &&
+          Number.isInteger(data.index) && data.index >= 0 && data.index < Math.max(1, data.questions.length) &&
+          [data.picks, data.answers].every(list => Array.isArray(list) && list.length === 10 &&
+            list.every(v => v === null || letters.includes(v)))) return data;
+    } catch { /* Storage may be unavailable or contain an older session. */ }
+    return makeSession(true);
+  }
+
+  function save() {
+    clearTimeout(saveTimer);
+    try {
+      sessionStorage.setItem(key, JSON.stringify(session));
+      $("save-state").lastElementChild.textContent = "Sessione salvata nella scheda";
+    } catch {
+      $("save-state").lastElementChild.textContent = "Sessione in memoria";
+    }
+  }
+
+  function icon(name) {
+    const svg = document.createElementNS(svgNS, "svg");
+    svg.setAttribute("class", "icon");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    const use = document.createElementNS(svgNS, "use");
+    use.setAttribute("href", "#ic-" + name);
+    svg.append(use);
+    return svg;
+  }
+
+  function node(tag, content, className) {
+    const item = document.createElement(tag);
+    if (content !== undefined) item.textContent = content;
+    if (className) item.className = className;
+    return item;
+  }
+
+  function counts() {
+    const done = session.answers.filter(Boolean).length;
+    const correct = session.questions.filter((q, n) => q.correct_answer === session.answers[n]).length;
+    return { done, correct, wrong: done - correct, total: session.questions.length };
+  }
+
+  function renderStats() {
+    const { done, correct, wrong, total } = counts();
+    $("total-done").textContent = done;
+    $("total-size").textContent = "/" + total;
+    $("correct-count").textContent = correct;
+    $("incorrect-count").textContent = wrong;
+    $("pending-count").textContent = total - done;
+    const accuracy = done ? Math.round(100 * correct / done) : 0;
+    $("accuracy-value").textContent = done ? accuracy + "%" : "—";
+    $("accuracy-bar").style.width = accuracy + "%";
+    $("chart").setAttribute("aria-label", done + " risposte confermate su " + total + ", di cui " + correct + " corrette");
+    $("results").hidden = !total || done !== total;
+
+    const arcs = [];
+    for (let n = 0; n < 10; n++) {
+      const circle = document.createElementNS(svgNS, "circle");
+      const answer = session.answers[n];
+      const paint = !answer ? "neutral" : answer === session.questions[n]?.correct_answer ? "correct" : "wrong";
+      Object.entries({ cx:60, cy:60, r:50, pathLength:100, fill:"none", stroke:"var(--" + paint + ")",
+        "stroke-width":11, "stroke-dasharray":"9.55 90.45", "stroke-dashoffset":-10*n }).forEach(([k,v]) => circle.setAttribute(k,String(v)));
+      arcs.push(circle);
+    }
+    $("ring").replaceChildren(...arcs);
+  }
+
+  function renderNav() {
+    const buttons = session.questions.map((q, n) => {
+      const b = node("button", n + 1);
+      b.type = "button";
+      const answer = session.answers[n];
+      const status = answer === null ? "da confermare" : answer === q.correct_answer ? "corretta" : "errata";
+      if (answer !== null) b.className = answer === q.correct_answer ? "right" : "wrong";
+      if (n === session.index) b.setAttribute("aria-current", "step");
+      b.setAttribute("aria-label", "Domanda " + (n + 1) + ", " + status);
+      b.title = b.getAttribute("aria-label");
+      b.addEventListener("click", () => goTo(n));
+      return b;
+    });
+    $("question-nav").replaceChildren(...buttons);
+  }
+
+  function renderQuestion() {
+    const n = session.index;
+    const q = session.questions[n];
+    const confirmed = session.answers[n];
+    $("question-count").textContent = "Domanda " + String(n + 1).padStart(2, "0") + " / 10";
+    $("question-title").textContent = q.question;
+    renderNav();
+    const options = letters.map(letter => {
+      const label = node("label", undefined, "option");
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "answer";
+      input.value = letter;
+      input.checked = (confirmed ?? session.picks[n]) === letter;
+      input.disabled = confirmed !== null;
+      label.append(input, node("span", letter.toUpperCase(), "letter"), node("span", q.options[letter]));
+      if (confirmed !== null && (letter === q.correct_answer || letter === confirmed)) {
+        const right = letter === q.correct_answer;
+        label.classList.add(right ? "right" : "wrong");
+        const mark = node("span", right ? "✓" : "×", "answer-mark");
+        mark.setAttribute("aria-hidden", "true");
+        label.append(mark, node("span", right ? "Risposta corretta" : "Risposta errata", "sr-only"));
+      }
+      input.addEventListener("change", () => {
+        session.picks[n] = letter;
+        $("confirm").disabled = false;
+        save();
+      });
+      return label;
+    });
+    $("options").replaceChildren(...options);
+    const feedback = $("feedback");
+    feedback.hidden = confirmed === null;
+    if (confirmed !== null) {
+      const right = confirmed === q.correct_answer;
+      feedback.classList.toggle("missed", !right);
+      feedback.textContent = right ? "Risposta corretta." :
+        "Risposta errata. Quella corretta è " + q.correct_answer.toUpperCase() + " · " + q.options[q.correct_answer] + ".";
+    }
+    $("prev").disabled = n === 0;
+    $("next").disabled = n === session.questions.length - 1;
+    const complete = counts().done === session.questions.length;
+    const confirm = $("confirm");
+    confirm.disabled = confirmed === null && !session.picks[n];
+    confirm.replaceChildren(icon(confirmed === null ? "check" : complete ? "chart" : "cards"),
+      node("span", confirmed === null ? "Conferma risposta" : complete ? "Vedi risultato" : "Prossima domanda"));
+  }
+
+  function updateSource() {
+    const wordCount = session.notes.trim().match(/\S+/gu)?.length || 0;
+    $("word-count").textContent = wordCount + (wordCount === 1 ? " parola" : " parole");
+    $("generate").disabled = Boolean(pending) || !wordCount;
+  }
+
+  function render() {
+    const hasQuiz = session.questions.length > 0;
+    notes.value = session.notes;
+    notes.readOnly = Boolean(pending);
+    $("generate").lastElementChild.textContent = pending ? "Generazione in corso…" : "Genera quiz";
+    $("cancel-load").hidden = !pending;
+    $("quiz-view").hidden = !hasQuiz || Boolean(pending);
+    $("empty-quiz").hidden = hasQuiz || Boolean(pending);
+    $("loading").hidden = !pending;
+    document.querySelector(".quiz-panel").setAttribute("aria-busy", String(Boolean(pending)));
+    const badge = $("mode-badge");
+    badge.hidden = !hasQuiz || Boolean(pending);
+    badge.classList.toggle("live", !session.isDemo);
+    badge.textContent = session.isDemo ? "Esempio" : "Dai tuoi appunti";
+    if (hasQuiz && !pending) renderQuestion();
+    updateSource();
+    renderStats();
+  }
+
+  function goTo(index) {
+    if (pending || index < 0 || index >= session.questions.length) return;
+    session.index = index;
+    renderQuestion();
+    save();
+    $("question-title").focus({preventScroll:true});
+  }
+
+  function showError(message = "") {
+    $("source-error").hidden = !message;
+    $("source-error").textContent = message;
+  }
+
+  function closeModal() {
+    modal.close();
+  }
+
+  function showModal(title, copy, actions) {
+    if (!modal.open) opener = document.activeElement;
+    $("modal-title").textContent = title;
+    $("modal-copy").replaceChildren(...copy);
+    $("modal-actions").replaceChildren(...actions.map(({label, primary, click}) => {
+      const button = node("button", label, "btn " + (primary ? "btn-forest" : "btn-light"));
+      button.type = "button";
+      button.addEventListener("click", () => { closeModal(); click?.(); });
+      return button;
+    }));
+    if (!modal.open) modal.showModal();
+  }
+
+  function showResults() {
+    const { correct, total, wrong } = counts();
+    showModal("Quiz completato", [
+      node("p", "Hai risposto correttamente a " + correct + " domande su " + total + " (" + Math.round(100 * correct / total) + "%)."),
+      node("p", wrong ? "Puoi rivedere le risposte oppure ripetere lo stesso quiz." : "Hai risposto correttamente a tutte le domande.")
+    ], [
+      { label:"Ripeti quiz", click:() => {
+        session.picks.fill(null); session.answers.fill(null); session.index = 0;
+        render(); save(); $("question-title").focus();
+      } },
+      { label:"Rivedi risposte", primary:true, click:() => {
+        const firstWrong = session.questions.findIndex((q,n) => q.correct_answer !== session.answers[n]);
+        goTo(Math.max(0,firstWrong));
+      } }
+    ]);
+  }
+
+  function stopRequest() {
+    if (pending) pending.abort();
+    pending = null;
+  }
+
+  function reset(demo) {
+    stopRequest();
+    session = makeSession(demo);
+    showError(); render(); save();
+    if (demo) $("question-title").focus();
+    else notes.focus();
+  }
+
+  async function generate() {
+    if (pending || !session.notes.trim()) return;
+    showError();
+    if (location.protocol === "file:") {
+      showError("Per generare un quiz, apri questa pagina dal server che espone /api/quizzes.");
+      return;
+    }
+    const controller = new AbortController();
+    pending = controller;
+    render();
+    $("cancel-load").focus({preventScroll:true});
+    try {
+      const questions = await QuizCore.generate(session.notes, controller.signal);
+      if (pending !== controller) return;
+      session = { ...makeSession(), notes:session.notes, questions };
+      pending = null;
+      render(); save();
+      $("announce").textContent = "Quiz generato. Dieci domande pronte.";
+      $("question-title").focus();
+    } catch (error) {
+      if (pending !== controller) return;
+      pending = null;
+      render();
+      showError(error.message || "Impossibile generare il quiz. Riprova.");
+      $("generate").focus({preventScroll:true});
+    }
+  }
+
+  icons.forEach(item => item.replaceWith(icon(item.dataset.icon)));
+  $("date").textContent = new Intl.DateTimeFormat("it-IT", {weekday:"long",day:"numeric",month:"long"}).format(new Date());
+  notes.addEventListener("input", () => {
+    session.notes = notes.value;
+    showError(); updateSource();
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(save, 200);
+  });
+  window.addEventListener("pagehide", save);
+  $("source-form").addEventListener("submit", event => {
+    event.preventDefault();
+    if (pending || !session.notes.trim()) return;
+    if (!counts().done) { generate(); return; }
+    showModal("Generare un nuovo quiz?", [node("p","Il nuovo quiz sostituirà le domande attuali e le risposte già confermate.")],
+      [{label:"Annulla"},{label:"Genera quiz",primary:true,click:generate}]);
+  });
+  $("cancel-load").addEventListener("click", () => {
+    stopRequest(); render();
+    $("announce").textContent = "Generazione annullata.";
+    $("generate").focus({preventScroll:true});
+  });
+  $("prev").addEventListener("click", () => goTo(session.index - 1));
+  $("next").addEventListener("click", () => goTo(session.index + 1));
+  $("confirm").addEventListener("click", () => {
+    const n = session.index;
+    if (session.answers[n] !== null) {
+      if (counts().done === 10) { showResults(); return; }
+      let next = (n + 1) % 10;
+      while (session.answers[next] !== null) next = (next + 1) % 10;
+      goTo(next);
+      return;
+    }
+    if (!session.picks[n]) return;
+    session.answers[n] = session.picks[n];
+    renderQuestion(); renderStats(); save();
+    $("announce").textContent = "Domanda " + (n + 1) + ". " + $("feedback").textContent;
+    if (counts().done === 10) showResults();
+  });
+  $("results").addEventListener("click", showResults);
+  $("new-session").addEventListener("click", () => {
+    if (!pending && !session.notes && !session.questions.length) { notes.focus(); return; }
+    showModal("Aprire una nuova sessione?", [node("p","Gli appunti e le risposte di questa scheda saranno cancellati.")],
+      [{label:"Annulla"},{label:"Nuova sessione",primary:true,click:() => reset(false)}]);
+  });
+  $("demo").addEventListener("click", () => {
+    if (!session.notes.trim()) { reset(true); return; }
+    showModal("Aprire l’esempio?", [node("p","Gli appunti sulla fotosintesi sostituiranno il testo presente nella scheda.")],
+      [{label:"Annulla"},{label:"Apri esempio",primary:true,click:() => reset(true)}]);
+  });
+  $("help").addEventListener("click", () => {
+    const list = node("ol");
+    ["Incolla o scrivi un testo negli appunti e premi «Genera quiz». Il testo viene inviato al server del notebook.",
+      "Per ogni domanda scegli una delle quattro risposte e confermala. Usa i numeri per spostarti tra le domande.",
+      "Il riepilogo si aggiorna dopo ogni conferma. La precisione è la percentuale di risposte corrette tra quelle confermate."].forEach(s => list.append(node("li",s)));
+    showModal("Guida rapida", [list], [{label:"Ho capito",primary:true}]);
+  });
+  $("close-modal").addEventListener("click",closeModal);
+  modal.addEventListener("click", event => { if (event.target === modal) closeModal(); });
+  modal.addEventListener("close", () => {
+    if (document.activeElement === document.body && opener?.isConnected) opener.focus({preventScroll:true});
+  });
+  render();
+  save();
+})();
+  </script>
+</body>
+</html>
